@@ -1,0 +1,4 @@
+0.1.0 (2008-05-16)
+==================
+
+- Created package with ZopeSkel
