@@ -23,7 +23,7 @@ from Globals import InitializeClass
 from App.Dialogs import MessageDialog
 
 # Bibliography stuff
-from Products.CMFBibliographyAT.tool.parsers.base \
+from bibliograph.parsing.parsers.base \
      import IBibliographyParser, BibliographyParser
 
 

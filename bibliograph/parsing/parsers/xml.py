@@ -20,16 +20,16 @@ from App.Dialogs import MessageDialog
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFBibliographyAT.tool.parsers.base \
+from bibliograph.parsing.parsers.base \
      import IBibliographyParser, BibliographyParser
-from Products.CMFBibliographyAT.tool.parsers.base import isTransformable
+from bibliograph.parsing.parsers.base import isTransformable
 
 try:
     import _bibtex
-    from Products.CMFBibliographyAT.tool.parsers.pyblbibtex \
+    from bibliograph.parsing.parsers.pyblbibtex \
          import PyBlBibtexParser as BaseParser
 except ImportError:
-    from Products.CMFBibliographyAT.tool.parsers.bibtex \
+    from bibliograph.parsing.parsers.bibtex \
          import BibtexParser as BaseParser
 
 
