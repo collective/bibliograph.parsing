@@ -1,1 +1,1 @@
-#
+GLOBALS = globals()
