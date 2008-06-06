@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+<mods ID="GrootEtAl2003">
+    <titleInfo>
+        <title>Molecular genetic evidence for parthenogenesis in the Burmese python, Python molurus bivittatus.</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">T</namePart>
+        <namePart type="given">V</namePart>
+        <namePart type="given">M</namePart>
+        <namePart type="family">Groot</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">E</namePart>
+        <namePart type="family">Bruins</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">J</namePart>
+        <namePart type="given">A</namePart>
+        <namePart type="given">J</namePart>
+        <namePart type="family">Breeuwer</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <dateIssued>2003</dateIssued>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <relatedItem type="host">
+        <titleInfo>
+            <title>Heredity</title>
+        </titleInfo>
+        <originInfo>
+            <issuance>continuing</issuance>
+        </originInfo>
+        <genre authority="marcgt">periodical</genre>
+        <genre>academic journal</genre>
+    </relatedItem>
+    <abstract>Parthenogenesis among reptiles is rare. Only a few species have the ability to reproduce asexually. Most of these are obligate parthenogenetic species that consist (almost) entirely of females, which can reproduce solely through parthenogenesis. Rarer are sexual species that only sporadically reproduce through parthenogenesis. A female Python molurus bivittatus (Reptilia, Boidae) from the Artis Zoo, Amsterdam, produced eggs in five consecutive years that contained embryos while she was isolated from males. These eggs might be fertilized with stored sperm, or might be the product of parthenogenesis. Parthenogenesis has not been shown for the Boidae family before. We performed parentship analyses on the snake and seven of her embryos using microsatellites and AFLP. Four microsatellite loci developed for this species combined with three loci developed previously for different snake species revealed too little variation to discriminate between sperm retention and parthenogenesis. With AFLP we were able to confirm that the Artis Zoo female reproduced parthenogenetically. Because the offspring are genetically identical to their mother, whereas in previous studies on sporadic parthenogenesis in snakes a loss of genetic information was reported, we conclude that the meiotic pathways that produce the diploid egg cells are different.Heredity (2003) 90, 130-135. doi:10.1038/sj.hdy.6800210</abstract>
+    <note>automatic medline import</note>
+    <identifier type="citekey">GrootEtAl2003</identifier>
+    <part>
+        <date>2003</date>
+        <detail type="volume"><number>90</number></detail>
+        <detail type="number"><number>2</number></detail>
+        <extent unit="page">
+            <start>130</start>
+            <end>5</end>
+        </extent>
+    </part>
+</mods>
+<mods ID="AlibardiThompson2003">
+    <titleInfo>
+        <title>Epidermal differentiation during ontogeny and after hatching in the snake Liasis fuscus (Pythonidae, Serpentes, Reptilia), with emphasis on the formation of the shedding complex.</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">L</namePart>
+        <namePart type="family">Alibardi</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">M</namePart>
+        <namePart type="given">B</namePart>
+        <namePart type="family">Thompson</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <dateIssued>2003</dateIssued>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <relatedItem type="host">
+        <titleInfo>
+            <title>J Morphol</title>
+        </titleInfo>
+        <originInfo>
+            <issuance>continuing</issuance>
+        </originInfo>
+        <genre authority="marcgt">periodical</genre>
+        <genre>academic journal</genre>
+    </relatedItem>
+    <abstract>Differentiation and localization of keratin in the epidermis during embryonic development and up to 3 months posthatching in the Australian water python, Liasis fuscus, was studied by ultrastructural and immunocytochemical methods. Scales arise from dome-like folds in the skin that produce tightly imbricating scales. The dermis of these scales is completely differentiated before any epidermal differentiation begins, with a loose dermis made of mesenchymal cells beneath the differentiating outer scale surface. At this stage (33) the embryo is still unpigmented and two layers of suprabasal cells contain abundant glycogen. At Stage 34 (beginning of pigmentation) the first layers of cells beneath the bilayered periderm (presumptive clear and oberhautchen layers) have not yet formed a shedding complex, within which prehatching shedding takes place. At Stage 35 the shedding complex, consisting of the clear and oberhautchen layers, is discernible. The clear layer contains a fine fibrous network that faces the underlying oberhautchen, where the spinulae initially contain a core of fibrous material and small beta-keratin packets. Differentiation continues at Stage 36 when the beta-layer forms and beta-keratin packets are deposited both on the fibrous core of the oberhautchen and within beta-cells. Mesos cells are produced from the germinal layer but remain undifferentiated. At Stage 37, before hatching, the beta-layer is compact, the mesos layer contains mesos granules, and cells of the alpha-layer are present but are not yet keratinized. They are still only partially differentiated a few hours after hatching, when a new shedding complex is forming underneath. Using antibodies against chick scale beta-keratin resolved at high magnification with immunofluorescent or immunogold conjugates, we offer the first molecular confirmation that in snakes only the oberhautchen component of the shedding complex and the underlying beta cells contain beta-keratin. Initially, there is little immunoreactivity in the small beta-packets of the oberhautchen, but it increases after fusion with the underlying cells to produce the syncytial beta layer. The beta-keratin packets coalesce with the tonofilaments, including those attached to desmosomes, which rapidly disappear in both oberhautchen and beta-cells as differentiation progresses. The labeling is low to absent in forming mesos-cells beneath the beta-layer. This study further supports the hypothesis that the shedding complex in lepidosaurian reptiles evolved after there was a segregation between alpha-keratogenic cells from beta-keratogenic cells during epidermal renewal. J. Morphol. 256:29-41, 2003. Copyright 2003 Wiley-Liss, Inc.</abstract>
+    <note>automatic medline import</note>
+    <identifier type="citekey">AlibardiThompson2003</identifier>
+    <part>
+        <date>2003</date>
+        <detail type="volume"><number>256</number></detail>
+        <detail type="number"><number>1</number></detail>
+        <extent unit="page">
+            <start>29</start>
+            <end>41</end>
+        </extent>
+    </part>
+</mods>
+<mods ID="CokeEtAl2003">
+    <titleInfo>
+        <title>Pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius).</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">Rob</namePart>
+        <namePart type="given">L</namePart>
+        <namePart type="family">Coke</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">Robert</namePart>
+        <namePart type="given">P</namePart>
+        <namePart type="family">Hunter</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">Ramiro</namePart>
+        <namePart type="family">Isaza</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">David</namePart>
+        <namePart type="given">E</namePart>
+        <namePart type="family">Koch</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">Marie</namePart>
+        <namePart type="given">A</namePart>
+        <namePart type="family">Goatley</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">James</namePart>
+        <namePart type="given">W</namePart>
+        <namePart type="family">Carpenter</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <dateIssued>2003</dateIssued>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <relatedItem type="host">
+        <titleInfo>
+            <title>Am J Vet Res</title>
+        </titleInfo>
+        <originInfo>
+            <issuance>continuing</issuance>
+        </originInfo>
+        <genre authority="marcgt">periodical</genre>
+        <genre>academic journal</genre>
+    </relatedItem>
+    <abstract>OBJECTIVE: To determine pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius) after IV or oral administration of a single dose. ANIMALS: 2 male and 5 female ball pythons. PROCEDURES: Using a crossover design, each snake was given a single dose of azithromycin (10 mg/kg) IV. After a 4-week washout period, each snake was given a single dose of azithromycin (10 mg/kg) orally. Blood samples were collected prior to dose administration and 1, 3, 6, 12, 24, 48, 72, and 96 hours after azithromycin administration. Azithromycin was quantitated by use of liquid chromatography-mass spectrometry. RESULTS: After IV administration, azithromycin had an apparent volume of distribution of 5.69 L/kg and a plasma clearance of 0.19 L/h/kg. Harmonic means for the terminal half-life were 17 hours following IV administration and 51 hours following oral administration. Mean residence times were 37 and 94 hours following IV and oral administration, respectively. Following oral administration, azithromycin had a peak plasma concentration (Cmax) of 1.04 microg/mL, a time to Cmax of 8.4 hours, and a prolonged mean absorption time of 57 hours. Mean oral bioavailability was 77%. Tissue concentrations ranged from 4 to 140 times the corresponding plasma concentration at 24 and 72 hours after azithromycin administration. CONCLUSIONS AND CLINICAL RELEVANCE: Azithromycin is well absorbed and tolerated by ball pythons. On the basis of plasma pharmacokinetics and tissue concentration data, we suggest an azithromycin dosage in ball pythons of 10 mg/kg, orally, every 2 to 7 days, depending upon the site of infection and susceptibil ity of the infective organism.</abstract>
+    <note>automatic medline import</note>
+    <identifier type="citekey">CokeEtAl2003</identifier>
+    <part>
+        <date>2003</date>
+        <detail type="volume"><number>64</number></detail>
+        <detail type="number"><number>2</number></detail>
+        <extent unit="page">
+            <start>225</start>
+            <end>8</end>
+        </extent>
+    </part>
+</mods>
+<mods ID="TrapeMane2002">
+    <titleInfo>
+        <title>[The snakes of Senegal</title>
+        <subTitle>an annotated species list]</subTitle>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">J</namePart>
+        <namePart type="given">F</namePart>
+        <namePart type="family">Trape</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <name type="personal">
+        <namePart type="given">Y</namePart>
+        <namePart type="family">Mane</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <dateIssued>2002</dateIssued>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <relatedItem type="host">
+        <titleInfo>
+            <title>Bull Soc Pathol Exot</title>
+        </titleInfo>
+        <originInfo>
+            <issuance>continuing</issuance>
+        </originInfo>
+        <genre authority="marcgt">periodical</genre>
+        <genre>academic journal</genre>
+    </relatedItem>
+    <abstract>Between 1990 and 2001, the laboratory of Paludologie of IRD at Dakar collected over 5,500 snakes from all over Senegal. By studying this collection, an entirely new species was discovered for science and eight new species for Senegal. The presence of many specimens of rare species and the great number of localities from which snakes were collected also allowed us to solve several delicate taxonomic problems and better to specify the biogeography of Senegalese snakes. Currently, the presence in Senegal of at least 55 different species has been established with certainty. The data collected simultaneously on the burden of snakebites for public health shows considerable differences according to geographic area, with populations from south-eastern Senegal being more exposed to the risk of death by snakebite.</abstract>
+    <note>automatic medline import</note>
+    <identifier type="citekey">TrapeMane2002</identifier>
+    <part>
+        <date>2002</date>
+        <detail type="volume"><number>95</number></detail>
+        <detail type="number"><number>3</number></detail>
+        <extent unit="page">
+            <start>148</start>
+            <end>50</end>
+        </extent>
+    </part>
+</mods>
+</modsCollection>
+

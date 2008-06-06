@@ -1,0 +1,67 @@
+<1>
+IT : FLA
+GR : 
+TI : Transfers in Kind: Why They Can be Efficient and Nonpaternalistic
+FT : 
+AU : Bruce, Neil; Waldman, Michael
+SO : The American Economic Review
+S2 : 
+VO : 81
+NO : 5
+SE : 
+DA : Dec., 1991
+PP : 1345-1351
+EI : http://links.jstor.org/sici?sici=0002-8282%28199112%2981%3A5%3C1345%3ATIKWTC%3E2.0.CO%3B2-9
+IN : 00028282
+AB : 
+KW : 
+PB : American Economic Association
+LO : 
+LA : 
+CR : Copyright 1991 American Economic Association
+
+
+<2>
+IT : FLA
+GR : 
+TI : The Allocation of Talent: Implications for Growth
+FT : 
+AU : Murphy, Kevin M.; Shleifer, Andrei; Vishny, Robert W.
+SO : The Quarterly Journal of Economics
+S2 : 
+VO : 106
+NO : 2
+SE : 
+DA : May, 1991
+PP : 503-530
+EI : http://links.jstor.org/sici?sici=0033-5533%28199105%29106%3A2%3C503%3ATAOTIF%3E2.0.CO%3B2-P
+IN : 00335533
+AB : A country's most talented people typically organize production by others, so they can spread their ability advantage over a larger scale. When they start firms, they innovate and foster growth, but when they become rent seekers, they only redistribute wealth and reduce growth. Occupational choice depends on returns to ability and to scale in each sector, on market size, and on compensation contracts. In most countries, rent seeking rewards talent more than entrepreneurship does, leading to stagnation. Our evidence shows that countries with a higher proportion of engineering college majors grow faster; whereas countries with a higher proportion of law concentrators grow more slowly.
+KW : 
+PB : The MIT Press
+LO : 
+LA : 
+CR : Copyright 1991 The MIT Press
+
+
+<3>
+IT : FLA
+GR : 
+TI : Mixed Public and Private Financing of Education: Efficiency and Feasibility
+FT : 
+AU : Pauly, Mark V.
+SO : The American Economic Review
+S2 : 
+VO : 57
+NO : 1
+SE : 
+DA : Mar., 1967
+PP : 120-130
+EI : http://links.jstor.org/sici?sici=0002-8282%28196703%2957%3A1%3C120%3AMPAPFO%3E2.0.CO%3B2-F
+IN : 00028282
+AB : 
+KW : 
+PB : The American Economic Association
+LO : 
+LA : EN
+CR : Copyright 1967 American Economic Association
