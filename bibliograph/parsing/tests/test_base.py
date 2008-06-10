@@ -1,5 +1,4 @@
 import unittest
-from zope.interface import implements
 from zope.interface.verify import verifyObject
 
 from bibliograph.parsing.interfaces import IBibliographyParser

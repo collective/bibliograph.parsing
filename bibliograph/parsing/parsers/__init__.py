@@ -1,6 +1,5 @@
 from  bibtex import  BibtexParser, manage_addBibtexParser
 from  pyblbibtex import  PyBlBibtexParser, manage_addPyBlBibtexParser
-from  medline import  MedlineParser, manage_addMedlineParser
 from  ibss import IBSSParser, manage_addIBSSParser
 from  isbn import ISBNParser, manage_addISBNParser
 from  xml import XMLParser, manage_addXMLParser

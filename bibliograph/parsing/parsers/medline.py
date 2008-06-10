@@ -6,16 +6,10 @@
 ############################################################################
 
 """MedlineParser class"""
-
-# Zope stuff
-from Globals import InitializeClass
-from App.Dialogs import MessageDialog
-
-# Bibliography stuff
-from bibliograph.parsing.parsers.base \
-     import IBibliographyParser, BibliographyParser
-
 import re
+
+from bibliograph.parsing.interfaces import IBibliographyParser
+from bibliograph.parsing.parsers.base import BibliographyParser
 
 
 class MedlineParser(BibliographyParser):
@@ -23,24 +17,16 @@ class MedlineParser(BibliographyParser):
     A specific parser to process input in Medline-format.
     """
 
-    __implements__ = (IBibliographyParser ,)
-
-    meta_type = "Medline Parser"
-
     format = {'name':'Medline',
               'extension':'med'}
 
     def __init__(self,
-                 id = 'medline',
-                 title = "Medline parser",
                  delimiter = '\n\n',
                  pattern = r'(^.{0,4}- )',
                  flag = re.M):
         """
         initializes including the regular expression patterns
         """
-        self.id = id
-        self.title = title
         self.setDelimiter(delimiter)
         self.setPattern(pattern, flag)
 
@@ -131,19 +117,3 @@ class MedlineParser(BibliographyParser):
                 result.setdefault('authors',[]).append(adict)
 
         return result
-
-InitializeClass(MedlineParser)
-
-
-def manage_addMedlineParser(self, REQUEST=None):
-    """ """
-    try:
-        self._setObject('medline', MedlineParser())
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-
-
-    return self.manage_main(self, REQUEST)
