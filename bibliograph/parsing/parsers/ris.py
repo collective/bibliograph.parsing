@@ -19,7 +19,6 @@ from App.Dialogs import MessageDialog
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
-from Products.CMFCore.utils import getToolByName
 from bibliograph.parsing.parsers.base \
      import IBibliographyParser, BibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable

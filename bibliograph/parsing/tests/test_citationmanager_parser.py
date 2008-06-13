@@ -1,14 +1,23 @@
 import unittest
 
+from zope.interface.verify import verifyObject
+
 from bibliograph.parsing.tests import setup
 from bibliograph.parsing.tests.base import TestEntries
+from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.citationmanager import CitationManagerParser
 
 class TestCitationManagerParser(unittest.TestCase):
     ""
 
+    def test_parser_contract(self):
+        self.failUnless(IBibliographyParser.providedBy(CitationManagerParser()))
+        self.failUnless(verifyObject(IBibliographyParser, CitationManagerParser()))
+
     def test_parser(self):
         source = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
+        self.failUnless(source)
+        
         p = CitationManagerParser()
         entries = TestEntries(p.getEntries(source))
         

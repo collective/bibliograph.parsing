@@ -16,7 +16,7 @@ of these dictionaries will contain some  number of the following fields:
    |-------------------|-----------|---------------------------------------------------
    |'title'            |Yes        |the title of the content referenced by this entry
    |-------------------|-----------|---------------------------------------------------
-   |'abstract'         |?          |short description or summary of the content 
+   |'abstract'         |No         |short description or summary of the content 
    |                   |           | referenced by this entry
    |-------------------|-----------|---------------------------------------------------
    |'publisher'        |?          |name of the publishing company

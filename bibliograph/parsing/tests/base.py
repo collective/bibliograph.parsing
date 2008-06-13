@@ -48,7 +48,7 @@ class TestEntry(object):
         '''
 
         # Required fields
-        for key in ['abstract', 'authors', 'number', \
+        for key in ['authors', 'number', \
                         'publication_month', 'publication_year', \
                         'reference_type', 'title', 'volume']:
             try:
@@ -58,7 +58,7 @@ class TestEntry(object):
                                 "Missing at least field: %s from %s" % (key,kw))
 
         # Optional fields
-        for key in ['note', 'pages',]:
+        for key in ['note', 'pages', 'abstract', 'journal']:
             try:
                 setattr(self,key,kw[key])
             except:
