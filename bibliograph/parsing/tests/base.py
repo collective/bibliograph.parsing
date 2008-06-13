@@ -37,6 +37,14 @@ class TestEntries(object):
         """ Returns a list of all titles from respective entries.
         """
         return [e.title for e in self.entries]
+        
+    def entryByTitle(self, title):
+        """ Takes a title, returns the entry which has that title, or None
+        """
+        for e in self.entries:
+            if e.title == title:
+                return e
+        return None
 
 class TestEntry(object):
     """ Intended for test purposes only - takes a parsed entry and
@@ -63,4 +71,18 @@ class TestEntry(object):
                 setattr(self,key,kw[key])
             except:
                 pass # optional
+                
+    def authorIsPresent(self, author_dict):
+        """ Expects a dictionary with keys 'firstname', 'middlename', 'lastname'
+            Returns true if there is an author in self.authors which matches
+        """
+        for a in self.authors:
+            dict_same = True
+            for key in a.iterkeys():
+                if a[key] != author_dict[key]:
+                    dict_same = False
+            if dict_same == True:
+                return True
+            
+        return False
 

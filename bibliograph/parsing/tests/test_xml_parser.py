@@ -34,7 +34,25 @@ class testXMLParser(unittest.TestCase):
             self.failUnless(source)
             
             entries = TestEntries(parser.getEntries(source))
-            print entries
+            
+            # are there enough entries?
+            self.failUnless(len(entries) == 4)
+            # are there the right number of authors?
+            self.failUnless(len(entries.author_last_names()) == 13)
+            # test individual name parsings:
+            #  lastname, one initial
+            this_entry = entries.entryByTitle("Molecular genetic evidence for parthenogenesis in the Burmese python, Python molurus bivittatus.")
+            expected_author = {"firstname": "E.", "middlename": "","lastname": "Bruins"}
+            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
+            # lastname, more than one initial
+            expected_author = {"firstname": "T.", "middlename": "V.M.","lastname": "Groot"}
+            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
+            # lastname, firstname, middle initial
+            this_entry = entries.entryByTitle("Pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius).")
+            expected_author = {"firstname": "Robert", "middlename": "P.","lastname": "Hunter"}
+            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
+            
+                                
         else:
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """
