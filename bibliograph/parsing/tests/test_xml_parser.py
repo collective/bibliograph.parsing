@@ -57,6 +57,17 @@ class testXMLParser(unittest.TestCase):
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """
             print ("-" * 20) + "\n"
+            
+    def test_FormatDetection(self):
+        parser = XMLParser()
+    
+        s1 = open(setup.MEDLINE_TEST_XML, 'r').read()
+        s2 = open(setup.MEDLINE_TEST_BIB, 'r').read()
+        s3 = open(setup.MEDLINE_TEST_MED, 'r').read()
+        
+        self.failUnless(parser.checkFormat(s1), 'XML Parser failed to detect XML(MODS) format')
+        self.failIf(parser.checkFormat(s2), 'XML Parser incorrectly detected Bibtex format as XML(MODS)')
+        self.failIf(parser.checkFormat(s3), 'XML Parser incorrectly detected Medline format as XML(MODS)')
     
 
 def test_suite():

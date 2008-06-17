@@ -19,7 +19,6 @@ from App.Dialogs import MessageDialog
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
-from Products.CMFCore.utils import getToolByName
 from bibliograph.parsing.parsers.base \
      import IBibliographyParser, BibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
@@ -39,8 +38,6 @@ class XMLParser(BaseParser):
     Library of Congress's Metadata Object Description Schema (MODS). This is a very flexible standard that
     should prove quite useful as the number of tools that directly interact with it increase.
     """
-
-    __implements__ = (IBibliographyParser,)
 
     meta_type = "XML (MODS) Parser"
 
@@ -64,8 +61,7 @@ class XMLParser(BaseParser):
         return isTransformable('xml', 'bib')
 
     def checkFormat(self, source):
-        """
-        is this my format?
+        """ is this my format?
         """
         teststring = source[:200].lower()
         ai = teststring.find('www.loc.gov/mods')
@@ -83,17 +79,3 @@ class XMLParser(BaseParser):
         return tool.transform(source, 'xml', 'bib')
 
     # all the rest we inherit from our parent BibTeX(!) parser
-
-InitializeClass(XMLParser)
-
-
-def manage_addXMLParser(self, REQUEST=None):
-    """ """
-    try:
-        self._setObject('xml_mods', XMLParser())
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-    return self.manage_main(self, REQUEST)

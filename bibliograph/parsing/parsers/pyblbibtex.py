@@ -23,16 +23,14 @@ from Globals import InitializeClass
 from App.Dialogs import MessageDialog
 
 # Bibliography stuff
-from bibliograph.parsing.parsers.base \
-     import IBibliographyParser, BibliographyParser
+from bibliograph.parsing.parsers.base import BibliographyParser
+from bibliograph.parsing.interfaces import IBibliographyParser
 
 
 class PyBlBibtexParser(BibliographyParser):
     """
     A specific parser to process input in BiBTeX-format.
     """
-
-    __implements__ = (IBibliographyParser ,)
 
     meta_type = "Pybliographers Bibtex Parser"
 
@@ -218,27 +216,4 @@ class PyBlBibtexParser(BibliographyParser):
                      }
             alist.append(adict)
         return alist
-
-
- # Class instanciation
-InitializeClass(PyBlBibtexParser)
-
-
-def manage_addPyBlBibtexParser(self, REQUEST=None):
-    """ """
-    try:
-        if not HAS_PYBLIOGRAPHER:
-            raise ImportError
-        self._setObject('pyblbibtex', PyBlBibtexParser())
-    except ImportError:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add needs ' \
-            'the _bibtex module from pybliographer.',
-            action='manage_main')
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-    return self.manage_main(self, REQUEST)
+        

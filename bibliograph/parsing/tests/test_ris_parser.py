@@ -34,8 +34,7 @@ class testRISParser(unittest.TestCase):
             self.failUnless(source)
             
             entries = TestEntries(parser.getEntries(source))
-            #raise Exception(entries)
-            self.failUnless( len(entries) == 1 )
+            self.failUnless( len(entries) == 7 )
             self.failUnless( 'Markets and Municipalities: A Study of the Behavior of the Danish Municipalities' in entries.titles())
             
             entry = entries.entries[0]
@@ -62,6 +61,15 @@ class testRISParser(unittest.TestCase):
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """
             print ("-" * 20) + "\n"
+            
+    def test_FormatDetection(self):
+        parser = RISParser()
+        
+        s1 = open(setup.RIS_SOURCE, 'r').read()
+        s2 = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
+        
+        self.failUnless(parser.checkFormat(s1), 'RIS Parser failed to detect RIS format')
+        self.failIf(parser.checkFormat(s2), 'RIS Parser incorrectly detected citation manager format as RIS')
     
 
 def test_suite():

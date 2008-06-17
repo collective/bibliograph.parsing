@@ -12,10 +12,9 @@ from Globals import InitializeClass
 from App.Dialogs import MessageDialog
 
 # Bibliography stuff
-from bibliograph.parsing.parsers.base \
-     import IBibliographyParser, BibliographyParser
-from bibliograph.parsing.parsers.base \
-     import EntryParseError
+from bibliograph.parsing.parsers.base import BibliographyParser
+from bibliograph.parsing.interfaces import IBibliographyParser
+from bibliograph.parsing.parsers.base import EntryParseError
 
 # Python standard library imports
 import re
@@ -54,8 +53,6 @@ class CitationManagerParser(BibliographyParser):
     """
     A specific parser to process input in CitationManager format.
     """
-
-    __implements__ = (IBibliographyParser ,)
 
     meta_type = "CitationManager Parser"
 
@@ -163,18 +160,3 @@ class CitationManagerParser(BibliographyParser):
         month, year = s.split(', ')
         result['publication_year'] = year
         result['publication_month'] = month
-
-
-InitializeClass(CitationManagerParser)
-
-
-def manage_addCitationManagerParser(self, REQUEST=None):
-    """ """
-    try:
-        self._setObject('citationmanager', CitationManagerParser())
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-    return self.manage_main(self, REQUEST)

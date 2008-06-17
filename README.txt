@@ -45,4 +45,11 @@ of these dictionaries will contain some  number of the following fields:
    |'pages'            |No         |Page numbers within the given volume:number of the
    |                   |           | periodical in which the content appears
    |-------------------|-----------|---------------------------------------------------
+
+   
+Sources
+-------
+
+Formats for input files have been gleaned from a number of sources:  
+RIS: http://www.refman.com/support/risformat_intro.asp
    
