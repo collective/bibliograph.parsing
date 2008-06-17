@@ -1,0 +1,17 @@
+=========================
+bibliograph.parsing to-do
+=========================
+
+Immediate tasks
+---------------
+
+- Remove all CMF / Plone / Zope2 dependent code
+- Make all parsers utilities
+- Refactor CMFBibliography to use bibliograph.parsing
+
+Future considerations
+---------------------
+
+- Return bibliograph.core.interfaces.IBibliographicReference implementation
+  from the parsers
+- Standardize publication_month (presume we'll use the model in RISParser)
