@@ -28,3 +28,4 @@ BIBTEX_TEST_CITE_KEY = join(PACKAGE_HOME, 'samples',
 CITATION_MANAGER_SOURCE = join(PACKAGE_HOME, 'samples', 
                                'citationmanager_test.txt')
 RIS_SOURCE = join(PACKAGE_HOME, 'samples', 'ris_test.ris')
+ENDNOTE_TEST_SOURCE = join(PACKAGE_HOME, 'samples', 'endnote.end')

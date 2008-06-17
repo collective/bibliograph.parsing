@@ -7,21 +7,14 @@
 
 """EndNoteParser class"""
 
-# Python stuff
-import os
-
 # Zope stuff
 from zope.component import getUtility 
-
-from Globals import InitializeClass
-from App.Dialogs import MessageDialog
+from zope.interface import implements
 
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
-from Products.CMFCore.utils import getToolByName
-from bibliograph.parsing.parsers.base \
-     import IBibliographyParser, BibliographyParser
+from bibliograph.parsing.parsers.base import IBibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
 
 try:
@@ -38,10 +31,7 @@ class EndNoteParser(BaseParser):
     A specific parser to process input in EndNote's text format.
     """
 
-    __implements__ = (IBibliographyParser ,)
-
-    meta_type = "EndNote Parser"
-
+    implements(IBibliographyParser)
     format = {'name':'EndNote',
               'extension':'end'}
 
@@ -59,7 +49,6 @@ class EndNoteParser(BaseParser):
     def isAvailable(self):
         """ test if transforming from Endnote to BibTex is possible...
         """
-        bib_tool = getToolByName(self, 'portal_bibliography')
         return isTransformable('end', 'bib')
 
     def checkFormat(self, source):
@@ -83,17 +72,3 @@ class EndNoteParser(BaseParser):
         return tool.transform(source, 'end', 'bib')
 
     # all the rest we inherit from our parent BibTeX(!) parser
-
-InitializeClass(EndNoteParser)
-
-
-def manage_addEndNoteParser(self, REQUEST=None):
-    """ """
-    try:
-        self._setObject('endnote', EndNoteParser())
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-    return self.manage_main(self, REQUEST)

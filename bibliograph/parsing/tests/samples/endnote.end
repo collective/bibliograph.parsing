@@ -1,0 +1,42 @@
+%0 Journal Article
+%A Staccini, P.
+%A Dufour, J. C.
+%A Raps, H.
+%A Fieschi, M.
+%D 2005
+%T Combining advanced networked technology and pedagogical methods to improve collaborative distance learning
+%J Stud Health Technol Inform
+%V 116
+%P 273-8
+%! Combining advanced networked technology and pedagogical methods to improve collaborative distance learning
+%@ 0926-9630 (Print)
+%M 16160271
+%X Making educational material be available on a network cannot be reduced to merely implementing hypermedia and interactive resources on a server. A pedagogical schema has to be defined to guide students for learning and to provide teachers with guidelines to prepare valuable and upgradeable resources. Components of a learning environment, as well as interactions between students and other roles such as author, tutor and manager, can be deduced from cognitive foundations of learning, such as the constructivist approach. Scripting the way a student will to navigate among information nodes and interact with tools to build his/her own knowledge can be a good way of deducing the features of the graphic interface related to the management of the objects. We defined a typology of pedagogical resources, their data model and their logic of use. We implemented a generic and web-based authoring and publishing platform (called J@LON for Join And Learn On the Net) within an object-oriented and open-source programming environment (called Zope) embedding a content management system (called Plone). Workflow features have been used to mark the progress of students and to trace the life cycle of resources shared by the teaching staff. The platform integrated advanced on line authoring features to create interactive exercises and support live courses diffusion. The platform engine has been generalized to the whole curriculum of medical studies in our faculty; it also supports an international master of risk management in health care and will be extent to all other continuous training diploma.
+
+
+%0 Journal Article
+%A Staccini, P.
+%A Hergon, E.
+%A Joubert, M.
+%A Fieschi, M.
+%D 2007
+%T Collaborative and workflow-oriented digital portfolio: Creating a web-based tool to support a nationwide program of practices evaluation in the blood transfusion area
+%J Int J Med Inform
+%V 76
+%N 5-6
+%P 383-92
+%! Collaborative and workflow-oriented digital portfolio: Creating a web-based tool to support a nationwide program of practices evaluation in the blood transfusion area
+%@ 1386-5056 (Print)
+%M 17291828
+%K Blood Transfusion
+Cooperative Behavior
+Health Services Research/ organization & administration
+Humans
+Internet
+Primary Health Care/ standards
+Program Development
+Program Evaluation
+Quality Assurance, Health Care
+%X PURPOSE: The French National Blood Transfusion Institute received approval from the French National Health Authority to organize a nationwide program for the evaluation of professional practices in the area of blood transfusion. Major issues of the project were: (1) managing numerous physicians spread nationwide; (2) tracking and storing the physician's entire process (from his/her enrollment to his/her lifelong follow-up); (3) creating a collaborative technique for processing an evaluation program; (4) enhancing exchanges between participants; (5) proposing effective implementation of the assessment. METHODS: As faculty members with experience in distance learning, we considered the digital/electronic portfolio to be one of the most suitable techniques to support such a project. Due to the lack of methods and tools to meet users' expectations, the decision was made to prototype a new and innovative assessment environment. A team was formed to complete the design phase within 6 months (information content, roles and functions). Implementation of the prototype, which includes tests, was also planned over a 6-month period. The methodology involves two approaches: one concerns business process modelling; the other is related to object-oriented methods for design and implementation. RESULTS: This primary work was aimed at describing a specific object, the evaluation program, which can be shared between players within a web-based collaborative platform. Four types of players were identified: (1) physicians enrolled into the assessment program; (2) tutors assigned to follow physicians' assessment process; (3) program directors who manage the content of the assessment program and the application of follow-up rules; (4) supervisors who administrate the global system. The evaluation program is composed of a set of actions, which has to be performed by the physicians. These actions are directly related to the activities of the business processes to which the candidate belongs. For each action, elements of proof have to be uploaded by the physician, according to a predefined schedule. The status of this object and its changes are followed and managed by a workflow engine. Implementation of the system required an object-oriented content management system (Zope/Plone). CONCLUSION: The object-oriented approach helped us to focus on the topic of interest, the assessment program, without being concerned by the whole environment. The assessment model we designed attempts to make a link with the business process performed in daily routine. This article explores the way business process modelling can contribute to the modelling of a professional practices assessment system. Apart from the modelling and technical aspects, this nationwide project contains major challenges: to enroll all physicians on an individualized basis and to create appropriate conditions for the extension of the evaluation program and device to other specialties.
+
+

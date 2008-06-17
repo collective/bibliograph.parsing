@@ -4,7 +4,6 @@ from  ibss import IBSSParser, manage_addIBSSParser
 from  isbn import ISBNParser, manage_addISBNParser
 from  xml import XMLParser, manage_addXMLParser
 from  ris import RISParser, manage_addRISParser
-from  endnote import EndNoteParser, manage_addEndNoteParser
 from citationmanager import CitationManagerParser, \
      manage_addCitationManagerParser
 
@@ -20,9 +19,6 @@ def initialize(context):
                           )
     context.registerClass(IBSSParser,
                           constructors = (manage_addIBSSParser,),
-                          )
-    context.registerClass(EndNoteParser,
-                          constructors = (manage_addEndNoteParser,),
                           )
     context.registerClass(RISParser,
                           constructors = (manage_addRISParser,),
