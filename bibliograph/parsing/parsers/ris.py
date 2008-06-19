@@ -98,7 +98,8 @@ class RISParser(BaseParser):
         """
         pattern = re.compile('^[0-9|A-Z]{2}  - ', re.M)
         all_tags = re.findall(pattern, source)
-        if (len(all_tags) > 0) and (all_tags[0] == 'TY  - ') and (all_tags[len(all_tags)-1] == 'ER  - '):
+        if len(all_tags) and (all_tags[0] == 'TY  - ') \
+            and (all_tags[-1:] == ['ER  - ']):
             return 1
         return 0
         
