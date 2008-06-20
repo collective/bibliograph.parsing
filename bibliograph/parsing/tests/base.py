@@ -1,3 +1,6 @@
+from zope.interface import implements
+from bibliograph.core.interfaces import IBibliographicReference
+
 class TestEntries(object):
     """ For testing the parsers, this class wraps breaking the parsed
     dictionaries into TestEntry objects to simplify the testing code.
@@ -85,3 +88,8 @@ class TestEntry(object):
             
         return False
 
+class BibliographicReference(object):
+    """ Implementation class for IBibliographicReference
+    Currently only used in testing the parsers - refactor out when ready
+    """
+    implements(IBibliographicReference)

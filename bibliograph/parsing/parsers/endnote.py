@@ -6,6 +6,8 @@
 ############################################################################
 
 """EndNoteParser class"""
+# Python stuff
+import re
 
 # Zope stuff
 from zope.component import getUtility 
@@ -53,21 +55,29 @@ class EndNoteParser(BaseParser):
 
     def checkFormat(self, source):
         """
-        is this my format?
+        does the source look to be in endnote format?
         """
-        teststring = source[:200].lower()
-        ai = teststring.find('%T')
-        ei = teststring.find('%A')
-        di = teststring.find('%D')
-        if ai + ei + di > -2:
+        # Ultimately end2xml is used
+        # http://www.scripps.edu/~cdputnam/software/bibutils/bibutils2.html#end2xml
+
+        pattern = re.compile('^%[0-9|A-Z] ', re.M)
+        all_tags = re.findall(pattern, source)
+        # Should always start w/ '%0' and have at least one author '%A',
+        # a year (date) '%D' and a title '%T'
+        required = ('%A ', '%D ', '%T ')
+        if len(all_tags) and all_tags[0] == '%0 ' and \
+                reduce(lambda i, j: i and j, [r in all_tags for r in required]):
             return 1
         else:
             return 0
 
     def preprocess(self, source):
         """
-        convert EndNote to BibTeX
+        prep the source and convert EndNote to BibTeX
         """
+        # Remove carriage returns - end2xml chokes on them
+        source = source.replace('\r', '')
+
         tool = getUtility(IBibTransformUtility, name=u"external")
         return tool.transform(source, 'end', 'bib')
 

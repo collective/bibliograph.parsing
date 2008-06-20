@@ -18,4 +18,5 @@ Future considerations
 - Validate *Parser.checkFormat() is conclusive and accurate.  If this can't
   be done, consider a change in return value - boolean isn't adequate if
   we can't tell.
-   [x] RISParser 
+   [x] RISParser
+   [x] EndNoteParser

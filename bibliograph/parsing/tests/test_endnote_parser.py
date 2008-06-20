@@ -10,7 +10,8 @@ from bibliograph.parsing.interfaces import IBibliographyParser
 class TestEndNoteParser(unittest.TestCase):
 
     def setUp(self):
-        #setUp()
+        self.parser = EndNoteParser()
+
         from bibliograph.rendering.interfaces import IBibTransformUtility
         from bibliograph.rendering.utility import ExternalTransformUtility    
         ztapi.provideUtility(IBibTransformUtility, ExternalTransformUtility(),
@@ -20,13 +21,12 @@ class TestEndNoteParser(unittest.TestCase):
         self.failUnless(IBibliographyParser.providedBy(EndNoteParser()))
         self.failUnless(verifyObject(IBibliographyParser, EndNoteParser()))
 
-    def test_EndNoteImport(self):
+    def test_import(self):
 
-        parser = EndNoteParser()
-        if parser.isAvailable():
+        if self.parser.isAvailable():
             source = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
             self.failUnless(source)
-            entries = TestEntries(parser.getEntries(source))
+            entries = TestEntries(self.parser.getEntries(source))
             self.failUnless(len(entries) == 2)
             expected_author_last_names = ('Dufour', 'Fieschi', 'Hergon',
                                           'Joubert', 'Raps', 'Staccini',)
@@ -35,11 +35,33 @@ class TestEndNoteParser(unittest.TestCase):
             for name in expected_author_last_names:
                 self.failUnless(name in parsed_author_last_names,
                                 'Parse failed - missing author %s' % name)
+
+            expected_titles = ('Combining advanced networked technology and pedagogical methods to improve collaborative distance learning',
+                               'Collaborative and workflow-oriented digital portfolio: Creating a web-based tool to support a nationwide program of practices evaluation in the blood transfusion area',)
+                               
+            parsed_titles = [e.title for e in entries.entries]
+            for title in expected_titles:
+                self.failUnless(title in parsed_titles,
+                                'Parse failed - missing expected title "%s"' %
+                                title)
         else:
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """
             print ("-" * 20) + "\n"
         
+    def test_check_format(self):
+        s0 = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
+        s1 = open(setup.RIS_SOURCE, 'r').read()
+        s2 = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
+        
+        self.failUnless(self.parser.checkFormat("%0 \n%A \n%D \n%T "))
+        self.failIf(self.parser.checkFormat("%0 \n%A \n%T "))
+        self.failUnless(self.parser.checkFormat(s0), 
+                        'Endnote Parser failed to detect Endnote format')
+        self.failIf(self.parser.checkFormat(s1), 
+                        'Endnote Parser incorrectly accepted RIS format')
+        self.failIf(self.parser.checkFormat(s2), 
+                    'Endnote Parser incorrectly accepted citation manager format')
 
 def test_suite():
     suite = unittest.TestSuite([
