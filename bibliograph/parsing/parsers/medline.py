@@ -37,10 +37,15 @@ class MedlineParser(BibliographyParser):
         """
         is this my format?
         """
-        # vanilla test for 'PMID- ' in the sub-string 'source[0, 100]'
-        ## rr: can definitively be improved
+        # Medlines tags are up to for caps in length (padded) followed w/ a '-'
+        pattern = re.compile('^[A-Z| ]{4}-', re.M)
+        all_tags = re.findall(pattern, source)
 
-        if source.find('PMID- ', 0, 1000) > -1:
+        # Should always contain 'PMID-', have at least one author 'AU',
+        # an abstract 'AB' and a title 'TI'
+        required = ('AB  -', 'AU  -', 'PMID-', 'TI  -')
+        if len(all_tags) and \
+                reduce(lambda i, j: i and j, [r in all_tags for r in required]):
             return 1
         else:
             return 0

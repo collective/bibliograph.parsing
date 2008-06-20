@@ -20,3 +20,4 @@ Future considerations
   we can't tell.
    [x] RISParser
    [x] EndNoteParser
+   [x] Medline
