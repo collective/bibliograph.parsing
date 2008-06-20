@@ -5,6 +5,18 @@ bibliograph.parsing to-do
 Immediate tasks
 ---------------
 
+- Tests for all parsers
+   [ ] bibtex
+   [x] citationmanager
+   [x] endnote
+   [ ] entities
+   [ ] ibss
+   [ ] isbn
+   [+] medline
+   [ ] pyblbibtex
+   [x] ris
+   [x] xml
+
 - Remove all CMF / Plone / Zope2 dependent code
 - Make all parsers utilities
 - Refactor CMFBibliography to use bibliograph.parsing
@@ -18,6 +30,13 @@ Future considerations
 - Validate *Parser.checkFormat() is conclusive and accurate.  If this can't
   be done, consider a change in return value - boolean isn't adequate if
   we can't tell.
-   [x] RISParser
-   [x] EndNoteParser
-   [x] Medline
+   [ ] bibtex
+   [ ] citationmanager
+   [x] endnote
+   [ ] entities
+   [ ] ibss
+   [ ] isbn
+   [x] medline
+   [ ] pyblbibtex
+   [x] ris
+   [x] xml
