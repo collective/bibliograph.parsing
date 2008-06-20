@@ -149,4 +149,9 @@ def isTransformable(source_format, target_format):
     test if a transform from source_format to target_format.
     would be feasible
     """
-    return bool(_getCommand(source_format, target_format))
+    try:
+        _getCommand(source_format, target_format)
+    except (ValueError, LookupError):
+        return False
+    
+    return True

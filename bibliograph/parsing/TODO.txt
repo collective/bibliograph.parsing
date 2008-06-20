@@ -9,11 +9,10 @@ Immediate tasks
    [ ] bibtex
    [x] citationmanager
    [x] endnote
-   [ ] entities
-   [ ] ibss
-   [ ] isbn
+   [?] ibss
+   [?] isbn
    [+] medline
-   [ ] pyblbibtex
+   [?] pyblbibtex
    [x] ris
    [x] xml
 
@@ -31,12 +30,33 @@ Future considerations
   be done, consider a change in return value - boolean isn't adequate if
   we can't tell.
    [ ] bibtex
-   [ ] citationmanager
+   [?] citationmanager
    [x] endnote
-   [ ] entities
-   [ ] ibss
-   [ ] isbn
+   [?] ibss
+   [?] isbn
    [x] medline
-   [ ] pyblbibtex
+   [?] pyblbibtex
    [x] ris
    [x] xml
+   
+Format Issues:
+--------------
+
+- CitationManager doesn't appear to actually have a real file format.  So
+  far as I've been able to ascertain, CitationManager is a system at SFU
+  in Vancouver that stores bib citations in a database.  It allows for
+  export to RefWorks and EndNote, but doesn't appear to have its own internal
+  file format.  I have a hard time believing that this is the citationmanager 
+  referenced by our code here.  
+  (http://citationmanager.lib.sfu.ca/)
+- IBSS format is also ambiguous.  We have not yet been able to find a
+  definitive sample or definition
+- ISBN parser is dependant on a plone package (AmazonTool).  Do we want it in 
+  this supposedly plone/zope2 free parser library?  If we do, should we
+  implement the functionality from the AmazonTool into a real zope3 utility
+  so that we remain plone and zope2 independant?
+- PYBLBIBTEX it is unclear what the purpose of this parser is.  It appears to
+  be a source file from the Pybibliographer package, 'a python tool for
+  managing bibligraphic databases' (http://pybliographer.org/).  It seems that 
+  the original purpose of this file was as an inspiration for bibtex.py.  Can 
+  we simply delete it to help clean up a bit?

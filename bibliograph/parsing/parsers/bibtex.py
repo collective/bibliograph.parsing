@@ -21,10 +21,6 @@ from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.core.utils import _encode, _decode
 from bibliograph.core.encodings import _latex2utf8enc_mapping
 
-# our custom entity converter
-from entities import Convert
-convert = Convert()
-
 _encoding = 'utf-8'   # XXX: should be taken from the site configuration
 
 class BibtexParser(BibliographyParser):
@@ -171,17 +167,6 @@ class BibtexParser(BibliographyParser):
             source = _encode(_decode(source).replace(latex_entity, _latex2utf8enc_mapping[latex_entity]))
 
         return source
-
-    def uml2h(self, hit):
-        return convert(r'&' + hit.group(1) + 'uml;').encode(_encoding)
-    def ac2h(self, hit):
-        return convert(r'&' + hit.group(1) + 'acute;').encode(_encoding)
-    def gr2h(self, hit):
-        return convert(r'&' + hit.group(1) + 'grave;').encode(_encoding)
-    def cf2h(self, hit):
-        return convert(r'&' + hit.group(1) + 'circ;').encode(_encoding)
-    def tilde2h(self, hit):
-        return convert(r'&' + hit.group(1) + 'tilde;').encode(_encoding)
 
     def fixWhiteSpace(self, source):
         ttable = [(r'\ ', ' '),
