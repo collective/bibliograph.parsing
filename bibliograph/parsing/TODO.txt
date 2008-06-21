@@ -6,8 +6,8 @@ Immediate tasks
 ---------------
 
 - Tests for all parsers
-   [ ] bibtex
-   [x] citationmanager
+   [+] bibtex
+   [+] citationmanager
    [x] endnote
    [?] ibss
    [?] isbn
