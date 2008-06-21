@@ -121,8 +121,19 @@ class BibliographyParser(object):
         parses the entries
         returns a list of the parsed entries
         """
+        source = self.checkEncoding(source)
         return [self.parseEntry(entry) \
                 for entry in self.splitSource(source)]
+
+    def checkEncoding(self, source):
+        """
+        Make sure we have utf encoded text
+        """
+        try:
+            source = unicode(source, 'utf-8')
+        except UnicodeDecodeError:
+            source = unicode(source, 'latin1')
+        return source.encode('utf-8')
 
 
 class EntryParseError(object):

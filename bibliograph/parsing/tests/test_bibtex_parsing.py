@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 #######################################################
 #                                                     #
 #    Copyright (C), 2004, Raphael Ritz                #
@@ -10,37 +9,23 @@
 # http://www.logilab.fr/ -- mailto:contact@logilab.fr #
 #                                                     #
 #######################################################
+import unittest
 
-__revision__ = '$Id:  $'
+from bibliograph.parsing.parsers.bibtex import BibtexParser
+from bibliograph.parsing.tests import setup
+from bibliograph.parsing.tests.base import TestEntries
 
-
-import os, sys
-
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
-from Testing import ZopeTestCase
-from Products.CMFPlone.tests import PloneTestCase
-from Products.CMFBibliographyAT.tests import setup
-from ZODB.PersistentList import PersistentList
-from Globals import PersistentMapping
-
-#ZopeTestCase.installProduct('DeadlockDebugger')
-#import Products.DeadlockDebugger
-
-class TestBibtexParsing(PloneTestCase.PloneTestCase):
+class TestBibtexParsing(unittest.TestCase):
     """
     """
 
-    def afterSetUp(self):
-        self._refreshSkinData()
+    def setUp(self):
+        self.parser = BibtexParser()
 
     def testBibtexAuthorParsing(self):
-        bibtool = self.portal.portal_bibliography
-        p = bibtool.getParser('bibtex')
         source = open(setup.BIBTEX_TEST_MULTI_AUTHORS, 'r').read()
-        source = p.preprocess(source)
-        result = p.parseEntry(source)
+        source = self.parser.preprocess(source)
+        result = self.parser.parseEntry(source)
         heckman =  {'middlename': 'J.',
                     'firstname' : 'James',
                     'lastname'  : 'Heckman'}
@@ -58,8 +43,6 @@ class TestBibtexParsing(PloneTestCase.PloneTestCase):
         self.failUnless(author2['lastname'] == heckman['lastname'])
 
     def testBibtexInbookReferenceParsing(self):
-        bibtool = self.portal.portal_bibliography
-        p = bibtool.getParser('bibtex')
         source = open(setup.BIBTEX_TEST_INBOOKREFERENCES, 'r').read()
         ref = {
             'booktitle': 'In einem fiktiven Buch vor unserer Zeit',
@@ -68,22 +51,18 @@ class TestBibtexParsing(PloneTestCase.PloneTestCase):
             'publication_url': 'http://www.sunweavers.net/',
         }
 
-        source = p.preprocess(source)
-        result = p.parseEntry(source)
+        source = self.parser.preprocess(source)
+        result = self.parser.parseEntry(source)
 
         for key in ref.keys():
             self.failUnless( result.has_key(key) and (ref[key] == result[key]) )
 
     def testAnnoteParsing(self):
-        bibtool = self.portal.portal_bibliography
-        p = bibtool.getParser('bibtex')
         source = open(setup.BIBTEX_TEST_BIB, 'r').read()
-        results = p.getEntries(source)
+        results = self.parser.getEntries(source)
         self.failUnless(results[-1]['annote'] == 'I really like it.')
 
     def testBibtexTypeFieldParsing(self):
-        bibtool = self.portal.portal_bibliography
-        p = bibtool.getParser('bibtex')
         source = open(setup.BIBTEX_TEST_TYPEFIELD, 'r').read()
         ref = {
             'publication_type': 'Doktorarbeit',
@@ -92,21 +71,16 @@ class TestBibtexParsing(PloneTestCase.PloneTestCase):
             'institution': 'Ökologie-Zentrum',
         }
 
-        source = bibtool.checkEncoding(source)
-        source = p.preprocess(source)
-        result = p.parseEntry(source)
+        source = self.parser.checkEncoding(source)
+        source = self.parser.preprocess(source)
+        result = self.parser.parseEntry(source)
 
         for key in ref.keys():
             self.failUnless( result.has_key(key) and (ref[key] == result[key]) )
 
     def testBibtexTypeLastFieldTrailingKomma(self):
-        bibtool = self.portal.portal_bibliography
-        p = bibtool.getParser('bibtex')
         source = open(setup.BIBTEX_TEST_LASTFIELDKOMMA, 'r').read()
-
-        source = bibtool.checkEncoding(source)
-        source = p.preprocess(source)
-        results = p.getEntries(source)
+        results = self.parser.getEntries(source)
 
         # the last field in a bibtex entry always had a trailing ","
         self.failUnless( len(results) == 2  )
