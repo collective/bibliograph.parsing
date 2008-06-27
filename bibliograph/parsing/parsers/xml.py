@@ -19,17 +19,10 @@ from App.Dialogs import MessageDialog
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
-from bibliograph.parsing.parsers.base \
-     import IBibliographyParser, BibliographyParser
+from bibliograph.parsing.parsers.base import IBibliographyParser, BibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
 
-try:
-    import _bibtex
-    from bibliograph.parsing.parsers.pyblbibtex \
-         import PyBlBibtexParser as BaseParser
-except ImportError:
-    from bibliograph.parsing.parsers.bibtex \
-         import BibtexParser as BaseParser
+from bibliograph.parsing.parsers.bibtex import BibtexParser as BaseParser
 
 
 class XMLParser(BaseParser):

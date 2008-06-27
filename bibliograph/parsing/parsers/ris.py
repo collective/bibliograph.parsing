@@ -24,12 +24,7 @@ from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.base import BibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
 
-#try:
-#    import _bibtex
-#    from bibliograph.parsing.parsers.pyblbibtex \
-#         import PyBlBibtexParser as BaseParser
-from bibliograph.parsing.parsers.bibtex \
-     import BibtexParser as BaseParser
+from bibliograph.parsing.parsers.bibtex import BibtexParser as BaseParser
 
 
 month_mapper = {'jan' : '01',

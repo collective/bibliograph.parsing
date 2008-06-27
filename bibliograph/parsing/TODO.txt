@@ -12,7 +12,6 @@ Immediate tasks
    [?] ibss
    [?] isbn
    [+] medline
-   [?] pyblbibtex
    [x] ris
    [x] xml
 
@@ -35,7 +34,6 @@ Future considerations
    [?] ibss
    [?] isbn
    [x] medline
-   [?] pyblbibtex
    [x] ris
    [x] xml
    
@@ -55,8 +53,3 @@ Format Issues:
   this supposedly plone/zope2 free parser library?  If we do, should we
   implement the functionality from the AmazonTool into a real zope3 utility
   so that we remain plone and zope2 independant?
-- PYBLBIBTEX it is unclear what the purpose of this parser is.  It appears to
-  be a source file from the Pybibliographer package, 'a python tool for
-  managing bibligraphic databases' (http://pybliographer.org/).  It seems that 
-  the original purpose of this file was as an inspiration for bibtex.py.  Can 
-  we simply delete it to help clean up a bit?

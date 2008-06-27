@@ -50,7 +50,6 @@ class BibtexParser(BibliographyParser):
 
 
     # Here we need to provide 'checkFormat' and 'parseEntry'
-    # FIXME TODO - refactor with pyblbibtex
     def checkFormat(self, source):
         """
         is this my format?

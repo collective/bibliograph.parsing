@@ -19,13 +19,7 @@ from bibliograph.rendering.interfaces import IBibTransformUtility
 from bibliograph.parsing.parsers.base import IBibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
 
-try:
-    import _bibtex
-    from bibliograph.parsing.parsers.pyblbibtex \
-         import PyBlBibtexParser as BaseParser
-except ImportError:
-    from bibliograph.parsing.parsers.bibtex \
-         import BibtexParser as BaseParser
+from bibliograph.parsing.parsers.bibtex import BibtexParser as BaseParser
 
 
 class EndNoteParser(BaseParser):
