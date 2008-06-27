@@ -26,7 +26,7 @@ Future considerations
 - Validate *Parser.checkFormat() is conclusive and accurate.  If this can't
   be done, consider a change in return value - boolean isn't adequate if
   we can't tell.
-   [ ] bibtex
+   [X] bibtex
    [?] citationmanager
    [x] endnote
    [x] medline
@@ -43,3 +43,8 @@ Format Issues:
   file format.  I have a hard time believing that this is the citationmanager 
   referenced by our code here.  
   (http://citationmanager.lib.sfu.ca/)
+  
+- BibTeX format has an interesting problem.  Our sample files include an entry of type
+  'WebPublished', which is not listed anywhere that I can find as a valid entry type for 
+  the format.  Should we add it to the list of valid entry types (overriding the published
+  standard), or should we delete the sample?

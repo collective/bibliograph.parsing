@@ -54,14 +54,17 @@ class BibtexParser(BibliographyParser):
         """
         is this my format?
         """
-        # vanilla test for 'author' or 'editor'
-        # in the sub-string 'source[10, 100]'
-        ## rr: can definitively be improved
-
-        teststring = source[10:100].lower()
-        ai = teststring.find('author')
-        ei = teststring.find('editor')
-        if ai + ei > -2:
+        pattern = re.compile('^@[A-Z|a-z]*{', re.M)
+        all_tags = re.findall(pattern, source)
+        
+        if all_tags:        
+            for t in all_tags:
+                type = t.strip('@{').lower()
+                if type not in ('article','book','booklet','conference','inbook','incollection',
+                                'inproceedings','manual','mastersthesis','misc','phdthesis',
+                                'proceedings','techreport','unpublished','collection','patent',
+                                'webpublished'):
+                    return 0
             return 1
         else:
             return 0

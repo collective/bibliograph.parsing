@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #######################################################
 #                                                     #
 #    Copyright (C), 2004, Raphael Ritz                #
@@ -21,6 +22,21 @@ class TestBibtexParsing(unittest.TestCase):
 
     def setUp(self):
         self.parser = BibtexParser()
+            
+    def testFormatDetection(self):
+        source_files = (setup.MEDLINE_TEST_BIB, setup.BIBTEX_TEST_BIB, 
+                        setup.IDCOOKING_TEST_BIB, setup.PDFFOLDER_TEST_BIB, 
+                        setup.BIBTEX_TEST_BIB_DUP, setup.BIBTEX_TEST_MULTI_AUTHORS,
+                        setup.BIBTEX_TEST_INBOOKREFERENCES, setup.BIBTEX_TEST_LASTFIELDKOMMA,
+                        setup.BIBTEX_TEST_TYPEFIELD, setup.BIBTEX_TEST_CITE_KEY)
+                     
+        for source_file in source_files:
+            source = open(source_file, 'r').read()
+            self.failUnless(self.parser.checkFormat(source), 'BibTeX parser failed to detect BibTeX format in file %s' % source_file)
+        
+        # check negative detection (check properly rejects non-bibtex format files)
+        source = open(setup.MEDLINE_TEST_MED, 'r').read()
+        self.failIf(self.parser.checkFormat(source), 'BibTeX parser incorrectly detected BibTeX format in file %s' % setup.MEDLINE_TEST_MED)
 
     def testBibtexAuthorParsing(self):
         source = open(setup.BIBTEX_TEST_MULTI_AUTHORS, 'r').read()
