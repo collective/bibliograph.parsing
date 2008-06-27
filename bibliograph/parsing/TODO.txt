@@ -9,7 +9,6 @@ Immediate tasks
    [+] bibtex
    [+] citationmanager
    [x] endnote
-   [?] ibss
    [?] isbn
    [+] medline
    [x] ris
@@ -31,7 +30,6 @@ Future considerations
    [ ] bibtex
    [?] citationmanager
    [x] endnote
-   [?] ibss
    [?] isbn
    [x] medline
    [x] ris
@@ -47,8 +45,6 @@ Format Issues:
   file format.  I have a hard time believing that this is the citationmanager 
   referenced by our code here.  
   (http://citationmanager.lib.sfu.ca/)
-- IBSS format is also ambiguous.  We have not yet been able to find a
-  definitive sample or definition
 - ISBN parser is dependant on a plone package (AmazonTool).  Do we want it in 
   this supposedly plone/zope2 free parser library?  If we do, should we
   implement the functionality from the AmazonTool into a real zope3 utility
