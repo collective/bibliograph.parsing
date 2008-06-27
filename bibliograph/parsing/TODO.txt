@@ -9,7 +9,6 @@ Immediate tasks
    [+] bibtex
    [+] citationmanager
    [x] endnote
-   [?] isbn
    [+] medline
    [x] ris
    [x] xml
@@ -30,7 +29,6 @@ Future considerations
    [ ] bibtex
    [?] citationmanager
    [x] endnote
-   [?] isbn
    [x] medline
    [x] ris
    [x] xml
@@ -45,7 +43,3 @@ Format Issues:
   file format.  I have a hard time believing that this is the citationmanager 
   referenced by our code here.  
   (http://citationmanager.lib.sfu.ca/)
-- ISBN parser is dependant on a plone package (AmazonTool).  Do we want it in 
-  this supposedly plone/zope2 free parser library?  If we do, should we
-  implement the functionality from the AmazonTool into a real zope3 utility
-  so that we remain plone and zope2 independant?
