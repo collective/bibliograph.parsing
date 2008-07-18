@@ -1,7 +1,36 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="bibliograph.parsing">
+    i18n_domain="bibliograph.parsing"
+    >
 
+  <utility
+    provides=".interfaces.IBibliographyParser"
+    factory=".parsers.bibtex.BibtexParser"
+    name="bibtex"
+    permission="zope.Public" />
+
+  <utility
+    provides=".interfaces.IBibliographyParser"
+    factory=".parsers.endnote.EndNoteParser"
+    name="endnote"
+    permission="zope.Public" />
+
+  <utility
+    provides=".interfaces.IBibliographyParser"
+    factory=".parsers.medline.MedlineParser"
+    name="medline"
+    permission="zope.Public" />
+
+  <utility
+    provides=".interfaces.IBibliographyParser"
+    factory=".parsers.ris.RISParser"
+    name="ris"
+    permission="zope.Public" />
+
+  <utility
+    provides=".interfaces.IBibliographyParser"
+    factory=".parsers.xml.XMLParser"
+    name="xml"
+    permission="zope.Public" />
 
 </configure>

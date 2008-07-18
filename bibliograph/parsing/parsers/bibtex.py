@@ -16,7 +16,6 @@ from App.Dialogs import MessageDialog
 
 # Bibliography stuff
 from bibliograph.parsing.parsers.base import BibliographyParser
-from bibliograph.parsing.interfaces import IBibliographyParser
 
 from bibliograph.core.utils import _encode, _decode
 from bibliograph.core.encodings import _latex2utf8enc_mapping
@@ -27,8 +26,6 @@ class BibtexParser(BibliographyParser):
     """
     A specific parser to process input in BiBTeX-format.
     """
-
-    __implements__ = (IBibliographyParser ,)
 
     meta_type = "Bibtex Parser"
 

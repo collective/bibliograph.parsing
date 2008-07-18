@@ -8,7 +8,6 @@
 """MedlineParser class"""
 import re
 
-from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.base import BibliographyParser
 
 
