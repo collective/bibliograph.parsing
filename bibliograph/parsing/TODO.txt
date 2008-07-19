@@ -14,8 +14,6 @@ Immediate tasks
    [x] xml
 
 - Remove all CMF / Plone / Zope2 dependent code
-- Make all parsers utilities
-- Refactor CMFBibliography to use bibliograph.parsing
 
 Future considerations
 ---------------------
