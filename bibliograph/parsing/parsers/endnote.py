@@ -15,10 +15,7 @@ from zope.interface import implements
 
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
-
-from bibliograph.parsing.parsers.base import IBibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
-
 from bibliograph.parsing.parsers.bibtex import BibtexParser as BaseParser
 
 
@@ -27,7 +24,6 @@ class EndNoteParser(BaseParser):
     A specific parser to process input in EndNote's text format.
     """
 
-    implements(IBibliographyParser)
     format = {'name':'EndNote',
               'extension':'end'}
 

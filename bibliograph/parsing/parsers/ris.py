@@ -14,13 +14,9 @@ import re
 # Zope stuff
 from zope.component import getUtility
 
-from Globals import InitializeClass
-from App.Dialogs import MessageDialog
-
 # Bibliography stuff
 from bibliograph.rendering.interfaces import IBibTransformUtility
 
-from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.base import BibliographyParser
 from bibliograph.parsing.parsers.base import isTransformable
 

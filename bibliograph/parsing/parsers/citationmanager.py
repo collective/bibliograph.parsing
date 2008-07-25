@@ -7,10 +7,6 @@
 
 """CitationManager parser class"""
 
-# Zope stuff
-from Globals import InitializeClass
-from App.Dialogs import MessageDialog
-
 # Bibliography stuff
 from bibliograph.parsing.parsers.base import BibliographyParser
 from bibliograph.parsing.interfaces import IBibliographyParser

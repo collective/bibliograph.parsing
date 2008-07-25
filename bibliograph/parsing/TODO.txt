@@ -13,7 +13,12 @@ Immediate tasks
    [x] ris
    [x] xml
 
-- Remove all CMF / Plone / Zope2 dependent code
+- i18n
+  The parsers previously used the 'cmfbibliographyat' domain, and had
+  msgid='help_parser_%s' parser.getId() - need to port to the
+  bibliograph.parsing domain and provide a workaround to the parsers no
+  longer being persisted objects with an id.
+  See the BibliographyParser.Description()
 
 Future considerations
 ---------------------
@@ -30,7 +35,7 @@ Future considerations
    [x] medline
    [x] ris
    [x] xml
-   
+
 Format Issues:
 --------------
 

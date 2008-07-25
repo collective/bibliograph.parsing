@@ -16,14 +16,7 @@ from zope.interface import implements
 from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.rendering.utility import _getCommand
 
-# zope2 imports
-try:
-    import Acquisition
-    BaseClass = Acquisition.Explicit
-except ImportError:
-    BaseClass = object
-
-class BibliographyParser(BaseClass):
+class BibliographyParser(object):
     """
     Base class for the input parser of the bibliography tool.
     """
@@ -53,6 +46,16 @@ class BibliographyParser(BaseClass):
         """ if parser is enabled or not can be configured in the PropertyManager
         """
         return self.parser_enabled
+
+    def Description(self):
+        """
+        a short text that explains the target format of the parser
+        """
+        # TODO i18n this method, port to bibliograph.parsing domain
+        # domain='cmfbibliographyat'
+        # msgid='help_parser_%s' % self.getId()
+        # return self.translate(domain=domain, msgid=msgid, default='%s' % self.__doc__)
+        return self.__doc__
 
     def getFormatName(self):
         """ returns the name of the format """

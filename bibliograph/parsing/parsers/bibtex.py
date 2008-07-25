@@ -10,10 +10,6 @@
 # Python stuff
 import re
 
-# Zope stuff
-from Globals import InitializeClass
-from App.Dialogs import MessageDialog
-
 # Bibliography stuff
 from bibliograph.parsing.parsers.base import BibliographyParser
 
@@ -356,17 +352,3 @@ class BibtexParser(BibliographyParser):
             lst[j][k] = p[i]
 
         return map(tuple, lst)
-
-InitializeClass(BibtexParser)
-
-
-def manage_addBibtexParser(self, REQUEST=None):
-    """ """
-    try:
-        self._setObject('bibtex', BibtexParser())
-    except:
-        return MessageDialog(
-            title='Bibliography tool warning message',
-            message='The parser you attempted to add already exists.',
-            action='manage_main')
-    return self.manage_main(self, REQUEST)

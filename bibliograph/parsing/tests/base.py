@@ -87,9 +87,3 @@ class TestEntry(object):
                 return True
             
         return False
-
-class BibliographicReference(object):
-    """ Implementation class for IBibliographicReference
-    Currently only used in testing the parsers - refactor out when ready
-    """
-    implements(IBibliographicReference)
