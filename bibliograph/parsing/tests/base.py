@@ -59,8 +59,9 @@ class TestEntry(object):
         '''
 
         # Required fields
-        for key in ['authors', 'publication_month', 'publication_year',
-                    'reference_type', 'title', 'volume']:
+        required = ['authors', 'publication_month', 'publication_year',
+                    'reference_type', 'title', 'volume']
+        for key in required:
             try:
                 setattr(self,key,kw[key])
             except:
@@ -68,11 +69,10 @@ class TestEntry(object):
                                 "Missing at least field: %s from %s" % (key,kw))
 
         # Optional fields
-        for key in ['note', 'pages', 'abstract', 'journal', 'number']:
-            try:
+        for key in kw.keys():
+            if key not in required:
                 setattr(self,key,kw[key])
-            except:
-                pass # optional
+
                 
     def authorIsPresent(self, author_dict):
         """ Expects a dictionary with keys 'firstname', 'middlename', 'lastname'
