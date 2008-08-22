@@ -44,6 +44,19 @@ class TestEndNoteParser(unittest.TestCase):
                 self.failUnless(title in parsed_titles,
                                 'Parse failed - missing expected title "%s"' %
                                 title)
+            # Keywords - first entry in sample file has none, second has 9
+            self.failIf(hasattr(entries.entries[0],'keywords')
+                        and entries.entries[0].keywords,
+                        'Parsed non existing keywords')
+            self.failUnless(len(entries.entries[1].keywords) == 9)
+            # Confirm a few w/ tricky characters survived the parse
+            kwds = ["Health Services Research/ organization \\& administration",
+                    "Primary Health Care/ standards",
+                    "Program Evaluation",
+                    "Quality Assurance, Health Care"]
+            for keyword in kwds:
+                self.failUnless(keyword in entries.entries[1].keywords,
+                                "Failed to correctly parse keyword: '%s'" % keyword)
         else:
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """

@@ -239,6 +239,11 @@ class BibtexParser(BibliographyParser):
                     result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
                 else:
                     result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+            elif (key == 'keywords'):
+                if result.has_key('keywords'):
+                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
+                else:
+                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
             else:
                 value = self.clean(v.rstrip().rstrip(',').rstrip())
                 result[key] = value
@@ -301,12 +306,6 @@ class BibtexParser(BibliographyParser):
             tmp = tmp[:-1]
         if tmp:
             result['note'] = tmp
-        # make keywords a list
-        try:
-            tmp = eval(result.get('keywords', '[]'))
-        except:
-            tmp = result.get('keywords').split(',')
-        result['keywords'] = tmp
         result['publication_year'] = result.get('year', '')
         result['publication_month'] = result.get('month', '')
         result['publication_url'] = result.get('url', '')
