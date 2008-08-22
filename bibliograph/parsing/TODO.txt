@@ -7,7 +7,6 @@ Immediate tasks
 
 - Tests for all parsers
    [+] bibtex
-   [+] citationmanager
    [x] endnote
    [+] medline
    [x] ris
@@ -30,7 +29,6 @@ Future considerations
   be done, consider a change in return value - boolean isn't adequate if
   we can't tell.
    [X] bibtex
-   [?] citationmanager
    [x] endnote
    [x] medline
    [x] ris
@@ -39,14 +37,6 @@ Future considerations
 Format Issues:
 --------------
 
-- CitationManager doesn't appear to actually have a real file format.  So
-  far as I've been able to ascertain, CitationManager is a system at SFU
-  in Vancouver that stores bib citations in a database.  It allows for
-  export to RefWorks and EndNote, but doesn't appear to have its own internal
-  file format.  I have a hard time believing that this is the citationmanager 
-  referenced by our code here.  
-  (http://citationmanager.lib.sfu.ca/)
-  
 - BibTeX format has an interesting problem.  Our sample files include an entry of type
   'WebPublished', which is not listed anywhere that I can find as a valid entry type for 
   the format.  Should we add it to the list of valid entry types (overriding the published

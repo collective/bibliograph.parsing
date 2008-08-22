@@ -66,10 +66,10 @@ please make sure bibutils is installed to run all tests. """
         parser = RISParser()
         
         s1 = open(setup.RIS_SOURCE, 'r').read()
-        s2 = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
+        s2 = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
         
         self.failUnless(parser.checkFormat(s1), 'RIS Parser failed to detect RIS format')
-        self.failIf(parser.checkFormat(s2), 'RIS Parser incorrectly detected citation manager format as RIS')
+        self.failIf(parser.checkFormat(s2), 'RIS Parser incorrectly detected EndNote format as RIS')
     
 
 def test_suite():

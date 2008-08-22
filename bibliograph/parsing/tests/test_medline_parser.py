@@ -35,7 +35,6 @@ class TestMedlineParser(unittest.TestCase):
     def test_check_format(self):
         s0 = open(setup.MEDLINE_TEST_MED, 'r').read()
         s1 = open(setup.RIS_SOURCE, 'r').read()
-        s2 = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
         s3 = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
         
         self.failUnless(self.parser.checkFormat("AB  -\nAU  -\nPMID-\nTI  -"))
@@ -43,8 +42,6 @@ class TestMedlineParser(unittest.TestCase):
                         'Medline Parser failed to detect Medline format')
         self.failIf(self.parser.checkFormat(s1), 
                         'Medline Parser incorrectly accepted RIS format')
-        self.failIf(self.parser.checkFormat(s2), 
-                    'Medline Parser incorrectly accepted citation manager format')
         self.failIf(self.parser.checkFormat(s3), 
                     'Medline Parser incorrectly accepted EndNote format')
 

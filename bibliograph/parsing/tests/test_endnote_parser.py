@@ -65,7 +65,6 @@ please make sure bibutils is installed to run all tests. """
     def test_check_format(self):
         s0 = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
         s1 = open(setup.RIS_SOURCE, 'r').read()
-        s2 = open(setup.CITATION_MANAGER_SOURCE, 'r').read()
         
         self.failUnless(self.parser.checkFormat("%0 \n%A \n%D \n%T "))
         self.failIf(self.parser.checkFormat("%0 \n%A \n%T "))
@@ -73,8 +72,6 @@ please make sure bibutils is installed to run all tests. """
                         'Endnote Parser failed to detect Endnote format')
         self.failIf(self.parser.checkFormat(s1), 
                         'Endnote Parser incorrectly accepted RIS format')
-        self.failIf(self.parser.checkFormat(s2), 
-                    'Endnote Parser incorrectly accepted citation manager format')
 
 def test_suite():
     suite = unittest.TestSuite([
