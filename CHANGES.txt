@@ -2,4 +2,8 @@
 ==================
 
 - Created package with ZopeSkel
-- Removed obsolete/unused parser: CitationManager
+- Removed all CMF / Zope2 / Plone dependencies
+- Removed obsolete/unused parsers: [CitationManager, IBSS, ISBN, pyblbibex]
+- Fixed broken EndNote parser
+- Established reliable checkFormat() methods for existing parsers
+- Extended parser test coverage

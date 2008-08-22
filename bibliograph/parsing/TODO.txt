@@ -5,13 +5,6 @@ bibliograph.parsing to-do
 Immediate tasks
 ---------------
 
-- Tests for all parsers
-   [+] bibtex
-   [x] endnote
-   [+] medline
-   [x] ris
-   [x] xml
-
 - i18n
   The parsers previously used the 'cmfbibliographyat' domain, and had
   msgid='help_parser_%s' parser.getId() - need to port to the
@@ -25,14 +18,8 @@ Future considerations
 - Return bibliograph.core.interfaces.IBibliographicReference implementation
   from the parsers
 - Standardize publication_month (presume we'll use the model in RISParser)
-- Validate *Parser.checkFormat() is conclusive and accurate.  If this can't
-  be done, consider a change in return value - boolean isn't adequate if
-  we can't tell.
-   [X] bibtex
-   [x] endnote
-   [x] medline
-   [x] ris
-   [x] xml
+- Standardize to the XML_MODS format as it's the center transition
+  state for the current parsing process
 
 Format Issues:
 --------------
