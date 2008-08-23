@@ -20,12 +20,16 @@ class MedlineParser(BibliographyParser):
               'extension':'med'}
 
     def __init__(self,
+                 id = 'medline',
+                 title = 'Medline Parser',
                  delimiter = '\n\n',
                  pattern = r'(^.{0,4}- )',
                  flag = re.M):
         """
         initializes including the regular expression patterns
         """
+        self.id = id
+        self.title = title
         self.setDelimiter(delimiter)
         self.setPattern(pattern, flag)
 
