@@ -17,8 +17,8 @@ setup(name='bibliograph.parsing',
         ],
       keywords='bibtex bibliography xml endnote ris bibutils',
       author='Paul Bugni, Cris Ewing',
-      author_email='plone-biblio@zaubberer.net',
-      url='http://svn.plone.org/svn/plone/plone.example',
+      author_email='plone-biblio@das-netzwerkteam.de',
+      url='http://svn.plone.org/svn/collective/bibliograph.parsing/',
       license='ZPL 2.1',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['bibliograph'],
@@ -26,6 +26,7 @@ setup(name='bibliograph.parsing',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'bibliograph.core',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
