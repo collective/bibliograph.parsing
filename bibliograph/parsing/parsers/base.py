@@ -14,7 +14,8 @@ import re
 from zope.interface import implements
 
 from bibliograph.parsing.interfaces import IBibliographyParser
-from bibliograph.rendering.utility import _getCommand
+from bibliograph.core.bibutils import _getCommand
+
 
 class BibliographyParser(object):
     """
@@ -173,5 +174,5 @@ def isTransformable(source_format, target_format):
         _getCommand(source_format, target_format)
     except (ValueError, LookupError):
         return False
-    
+
     return True
