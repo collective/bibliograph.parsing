@@ -1,6 +1,32 @@
+import os
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.1.0'
+
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+long_description = (
+    read('README.txt')
+    + '\n' +
+    'Change history\n'
+    '**************\n'
+    + '\n' + 
+    read('CHANGES.txt')
+    + '\n' +
+    'Detailed Documentation\n'
+    '**********************\n'
+    + '\n' +
+    read('bibliograph', 'parsing', 'README.txt')
+    + '\n' +
+    'Contributors\n' 
+    '************\n'
+    + '\n' +
+    read('CONTRIBUTORS.txt')
+    + '\n' +
+    'Download\n'
+    '********\n'
+    )
 
 setup(name='bibliograph.parsing',
       version=version,
@@ -15,7 +41,7 @@ setup(name='bibliograph.parsing',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='bibtex bibliography xml endnote ris bibutils',
+      keywords='bibtex bibliography xml endnote ris bibutils parsers',
       author='Paul Bugni, Cris Ewing',
       author_email='plone-biblio@das-netzwerkteam.de',
       url='http://svn.plone.org/svn/collective/bibliograph.parsing/',
@@ -27,7 +53,6 @@ setup(name='bibliograph.parsing',
       install_requires=[
           'setuptools',
           'bibliograph.core',
-          # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-
