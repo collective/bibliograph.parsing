@@ -25,5 +25,7 @@ BIBTEX_TEST_TYPEFIELD = join(PACKAGE_HOME, 'samples',
                                  'bibtex_test_typefield.bib')
 BIBTEX_TEST_CITE_KEY = join(PACKAGE_HOME, 'samples',
                             'bibtex_test_cite_key.bib')
+BIBTEX_TEST_UNICODE = join(PACKAGE_HOME, 'samples',
+                            'bibtex_test_unicode.bib')
 RIS_SOURCE = join(PACKAGE_HOME, 'samples', 'ris_test.ris')
 ENDNOTE_TEST_SOURCE = join(PACKAGE_HOME, 'samples', 'endnote.end')

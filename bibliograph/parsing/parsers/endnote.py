@@ -49,7 +49,6 @@ class EndNoteParser(BaseParser):
         """
         # Ultimately end2xml is used
         # http://www.scripps.edu/~cdputnam/software/bibutils/bibutils2.html#end2xml
-
         pattern = re.compile('^%[0-9|A-Z] ', re.M)
         all_tags = re.findall(pattern, source)
         # Should always start w/ '%0' and have at least one author '%A',
@@ -67,7 +66,6 @@ class EndNoteParser(BaseParser):
         """
         # Remove carriage returns - end2xml chokes on them
         source = source.replace('\r', '')
-
         tool = getUtility(IBibTransformUtility, name=u"external")
         return tool.transform(source, 'end', 'bib')
 

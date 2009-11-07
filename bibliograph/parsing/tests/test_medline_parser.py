@@ -1,12 +1,15 @@
 import unittest
 from zope.interface.verify import verifyObject
 
+from bibliograph.core.interfaces import IBibliographicReference
+from bibliograph.core.interfaces import IArticleReference
+
 from bibliograph.parsing.tests import setup
-from bibliograph.parsing.tests.base import TestEntries
+from bibliograph.parsing.tests.base import BaseParserTestCase
 from bibliograph.parsing.parsers.medline import MedlineParser
 from bibliograph.parsing.interfaces import IBibliographyParser
 
-class TestMedlineParser(unittest.TestCase):
+class TestMedlineParser(BaseParserTestCase):
 
     def setUp(self):
         self.parser = MedlineParser()
@@ -16,27 +19,25 @@ class TestMedlineParser(unittest.TestCase):
         self.failUnless(verifyObject(IBibliographyParser, self.parser))
 
     def test_import(self):
-        source = open(setup.MEDLINE_TEST_MED, 'r').read()
+        source = self.readFile(setup.MEDLINE_TEST_MED)
         self.failUnless(source)
-
-        parser = MedlineParser()
-        entries = TestEntries(parser.getEntries(source))
-        self.failUnless(len(entries) == 4)
-        expected_author_last_names = ("Groot","Bruins","Breeuwer","Alibardi",\
-                                          "Thompson","Coke","Hunter","Isaza",\
-                                          "Koch","Goatley","Carpenter",\
-                                          "Trape","Mane",)
-
-        parsed_author_last_names = entries.author_last_names()
-        for name in expected_author_last_names:
-            self.failUnless(name in parsed_author_last_names,
-                            'Parse failed - missing author %s' % name)
+        entries = self.parser.getEntries(source)
+        self.failUnless( len(entries) == 4 )
+        for each in entries:
+            self.failUnless( IBibliographicReference.providedBy(each) )
+        t1 = u'Molecular genetic evidence for parthenogenesis in the Burmese python, Python molurus bivittatus.'
+        self.failUnless( entries[0].title == t1 )
+        self.failUnless( len(entries[0].authors) == 3 )
+        self.failUnless( entries[0].authors[0].lastname == u'Groot' )
+        self.failUnless( entries[0].authors[0].firstname == u'T' )
+        self.failUnless( entries[0].authors[0].middlename == u'V M' )
+        self.failUnless( entries[1].getIdentifierById('pmid') == u'12616573' )
+        self.failUnless( IArticleReference.providedBy(entries[1]) )
         
     def test_check_format(self):
-        s0 = open(setup.MEDLINE_TEST_MED, 'r').read()
-        s1 = open(setup.RIS_SOURCE, 'r').read()
-        s3 = open(setup.ENDNOTE_TEST_SOURCE, 'r').read()
-        
+        s0 = self.readFile(setup.MEDLINE_TEST_MED)
+        s1 = self.readFile(setup.RIS_SOURCE)
+        s3 = self.readFile(setup.ENDNOTE_TEST_SOURCE)
         self.failUnless(self.parser.checkFormat("AB  -\nAU  -\nPMID-\nTI  -"))
         self.failUnless(self.parser.checkFormat(s0), 
                         'Medline Parser failed to detect Medline format')

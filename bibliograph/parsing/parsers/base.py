@@ -9,12 +9,36 @@
 
 # Python stuff
 import re
+from types import UnicodeType
 
 # Zope stuff
 from zope.interface import implements
 
 from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.core.bibutils import _getCommand
+
+from bibliograph.core.content import Author
+from bibliograph.core.content import Identifier
+from bibliograph.core.content import Pages
+from bibliograph.core.content import Volume
+from bibliograph.core.content import WithinVolume
+from bibliograph.core.content import Address
+from bibliograph.core.content import BibliographicReference
+from bibliograph.core.content import ArticleReference
+from bibliograph.core.content import BookReference
+from bibliograph.core.content import BookletReference
+from bibliograph.core.content import ConferenceReference
+from bibliograph.core.content import InbookReference
+from bibliograph.core.content import IncollectionReference
+from bibliograph.core.content import InproceedingsReference
+from bibliograph.core.content import ManualReference
+from bibliograph.core.content import MiscReference
+from bibliograph.core.content import MasterthesisReference
+from bibliograph.core.content import PhdthesisReference
+from bibliograph.core.content import ProceedingsReference
+from bibliograph.core.content import TechreportReference
+from bibliograph.core.content import UnpublishedReference
+from bibliograph.core.content import WebpublishedReference
 
 
 class BibliographyParser(object):
@@ -36,6 +60,7 @@ class BibliographyParser(object):
         minimal initialization
         """
         self.format = BibliographyParser.format
+        self.setClassOutputs()
 
     def isAvailable(self):
         """ by default parser is available, override in specific parser's code
@@ -114,7 +139,15 @@ class BibliographyParser(object):
         """
         if hasattr(self, 'preprocess'):
             source = self.preprocess(source)
-        return self.delimiter.split(source)
+        entries = self.delimiter.split(source)
+        # Sometimes the split will return an empty entry (e.g. with medline
+        # formatted source).  We need to remove these or parseEntries gets very
+        # confused.
+        while u'' in entries:
+            entries.remove(u'')
+        while u'\n' in entries:
+            entries.remove(u'\n')
+        return entries
 
     def parseEntry(self, entry):
         """
@@ -139,11 +172,35 @@ class BibliographyParser(object):
         """
         Make sure we have utf encoded text
         """
+        if isinstance(source, UnicodeType):
+            return source
         try:
             source = unicode(source, 'utf-8')
         except UnicodeDecodeError:
             source = unicode(source, 'latin1')
-        return source.encode('utf-8')
+        #return source.encode('utf-8')
+        return source
+
+    def setClassOutputs(self,
+                        author=Author,
+                        identifier=Identifier,
+                        article=ArticleReference,
+                        book=BookReference,
+                        booklet=BookletReference,
+                        conference=ConferenceReference,
+                        inbook=InbookReference,
+                        incollection=IncollectionReference,
+                        inproceedings=InproceedingsReference,
+                        manual=ManualReference,
+                        misc=MiscReference,
+                        masterthesis=MasterthesisReference,
+                        phdthesis=PhdthesisReference,
+                        proceedings=ProceedingsReference,
+                        techreport=TechreportReference,
+                        unpublished=UnpublishedReference,
+                        webpublished=WebpublishedReference
+                        ):
+        self.class_outputs = locals()
 
 
 class EntryParseError(object):

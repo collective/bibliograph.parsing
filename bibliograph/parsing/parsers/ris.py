@@ -105,10 +105,10 @@ class RISParser(BaseParser):
     def parseEntry(self, entry):
         """See IBibliographyParser.
         """
-        rd = super(RISParser, self).parseEntry(entry) # rd for 'result_dict'
-        if not rd.has_key('number') and rd.has_key('issue'):
-            rd['number'] = rd['issue'].replace(' ', '')
-        rd['publication_month'] = fixMonth(rd['publication_month'])
-        return rd
+        return super(RISParser, self).parseEntry(entry)
+        #if not rd.has_key('number') and rd.has_key('issue'):
+        #    rd['number'] = rd['issue'].replace(' ', '')
+        #rd['publication_month'] = fixMonth(rd['publication_month'])
+        #return rd
 
     # all the rest we inherit from our parent BibTeX(!) parser

@@ -11,6 +11,7 @@
 import re
 
 # Bibliography stuff
+from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.base import BibliographyParser
 
 from bibliograph.core.utils import _encode, _decode
@@ -21,6 +22,10 @@ _encoding = 'utf-8'   # XXX: should be taken from the site configuration
 class BibtexParser(BibliographyParser):
     """
     A specific parser to process input in BiBTeX-format.
+
+    >>> from zope.interface.verify import verifyClass
+    >>> verifyClass(IBibliographyParser, BibtexParser)
+    True
     """
 
     meta_type = "Bibtex Parser"
@@ -32,7 +37,7 @@ class BibtexParser(BibliographyParser):
                  id = 'bibtex',
                  title = "BibTeX parser",
                  delimiter = '}\s*@',
-                 pattern = '(,\s*\w{2,}\s*=)'):
+                 pattern = r'(,\s*[\w\\]{2,}\s*=)'):
         """
         initializes including the regular expression patterns
         """
@@ -40,7 +45,7 @@ class BibtexParser(BibliographyParser):
         self.title = title
         self.setDelimiter(delimiter)
         self.setPattern(pattern)
-
+        super(BibtexParser, self).__init__()
 
     # Here we need to provide 'checkFormat' and 'parseEntry'
     def checkFormat(self, source):
@@ -49,14 +54,15 @@ class BibtexParser(BibliographyParser):
         """
         pattern = re.compile('^@[A-Z|a-z]*{', re.M)
         all_tags = re.findall(pattern, source)
-        
         if all_tags:        
             for t in all_tags:
-                type = t.strip('@{').lower()
-                if type not in ('article','book','booklet','conference','inbook','incollection',
-                                'inproceedings','manual','mastersthesis','misc','phdthesis',
-                                'proceedings','techreport','unpublished','collection','patent',
-                                'webpublished'):
+                type = t.strip(u'@{').lower()
+                if type not in (u'article', u'book', u'booklet', u'conference',
+                                u'inbook', u'incollection', u'inproceedings',
+                                u'manual', u'mastersthesis', u'misc',
+                                u'phdthesis', u'proceedings', u'techreport',
+                                u'unpublished', u'collection', u'patent',
+                                u'webpublished'):
                     return 0
             return 1
         else:
@@ -157,10 +163,11 @@ class BibtexParser(BibliographyParser):
         return self.explicitReplacements(source)
 
     def convertLaTeX2Unicode(self, source):
-
+        #source = _decode(source)
         for latex_entity in _latex2utf8enc_mapping.keys():
-            source = _encode(_decode(source).replace(latex_entity, _latex2utf8enc_mapping[latex_entity]))
-
+            source = source.replace(latex_entity,
+                                    _latex2utf8enc_mapping[latex_entity])
+        #return _encode(source)
         return source
 
     def fixWhiteSpace(self, source):
@@ -171,7 +178,8 @@ class BibtexParser(BibliographyParser):
         wsp_tilde = re.compile(r'[^/\\]~')
         return wsp_tilde.sub(self.tilde2wsp, source).replace('\~', '~')
 
-    def tilde2wsp(self, hit): return hit.group(0)[0] + ' '
+    def tilde2wsp(self, hit):
+        return hit.group(0)[0] + ' '
 
     def explicitReplacements(self, source):
         # list of 2 tuples; second element replaces first
@@ -197,139 +205,107 @@ class BibtexParser(BibliographyParser):
         returns a dictionary to be passed to
         BibliographyEntry's edit method
         """
-        result = {}
-        authorlist = []
-        authorURLlist = []
-
         # remove newlines and <CR>s, and remove the last '}'
         entry = entry.replace('\n', ' ').replace('\r', '').replace('\t', ' ').rstrip().rstrip('}')
         tokens = self.pattern.split(entry)
-
         try:
-            type, pid = tokens[0].strip().split('{')
-            type = type.replace('@', '').strip().lower()
-            result['reference_type'] = type.capitalize() + 'Reference'
-            result['pid'] = pid.replace(',', '').strip()
+            reftype, pid = tokens[0].strip().split('{')
+            reftype = reftype.replace('@', '').strip().lower()
         except:
             return "Bibtex Parser Error: malformed first line."
-
+        # Get hold of the correct classes to use in constructing the output
+        id_klass = self.class_outputs['identifier']
+        klass = self.class_outputs[reftype]
+        # Create the reference object from the looked-up class
+        obj = klass()
+        # Iterate over the key/value pairs from the bibtex
         for k,v in self.group(tokens[1:],2):
             key = k[1:-1].strip().lower()
+            v = self.clean(v.rstrip().rstrip(',').rstrip())
             # INBOOKs mapping: title -> booktitle, chapter -> chapter and title
-            if type == 'inbook':
-                if key == 'title':
-                    key = 'booktitle'
-
+            if reftype in ('inbook', 'incollection'):#, 'inproceedings'):
+                if key in ('title', 'booktitle'):
+                    key = 'volumetitle'
                 if key == 'chapter':
-                    result['title'] = self.clean(v.rstrip().rstrip(',').rstrip())
-
-            # BibTex field "type" maps to CMFBAT field "publication_type"
-            if key == 'type':
-                key = 'publication_type'
-                result[key] = self.clean(v.rstrip().rstrip(',').rstrip())
-
+                    key = 'title'
             # special procedure for authors and editors
-            elif key == 'author':
-                if result.has_key('author'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
-                else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
-            elif (key == 'editor') and (type in ['book','proceedings']):
-                if result.has_key('editor'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
-                else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+            if key == 'author':
+                [obj.authors.append(auth) for auth in self.parseAuthors(v, isEditor=False)]
+            elif key == 'editor' and reftype in ('inbook', 'incollection', 'inproceedings'):
+                [obj.editors.append(auth) for auth in self.parseAuthors(v, isEditor=True)]
+            elif key == 'year':
+                obj.publication_year = v
+            elif key == 'month':
+                obj.publication_month = v
+            elif key == 'number':
+                obj.issue = v
             elif (key == 'keywords'):
-                if result.has_key('keywords'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
-                else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+                #if result.has_key('keywords'):
+                #    result[key].append(v)
+                #else:
+                #    result[key] = [ v, ]
+                # XXX We don't handle this at the moment as they should, perhaps
+                #     be mapped to plone keywords
+                pass
+            elif key in ('doi', 'isbn', 'pmid'):
+                # These are 'identifiers'...
+                idobj = id_klass()
+                idobj.id = key
+                idobj.value = v
+                obj.identifiers.append(idobj)
             else:
-                value = self.clean(v.rstrip().rstrip(',').rstrip())
-                result[key] = value
-                # Aliasing the value to an upper-cased key so that when this dictionary
-                # is passed into <a_reference_object>.edit(**dictionary), the values
-                # will match and auto-update schema fields that are specified in either
-                # upper or lower case.  This is motivated by the 'DOI' field being upper-cased.
-                # Of course, this won't help mixed-case fields, but we'd probably need to change
-                # Archetype internals to fix that - and that would be a questionable endeavour.
-                result[key.upper()] = value
-
-            #print key, result[key]
-
-        # compile authors list of dictionaries
-        # we can have authors
-        if result.has_key('author'):
-            for each in result['author']:
-                each = each.replace(' AND', ' and')
-                authorlist.extend( each.split(' and') )
-        # but for some bibref types we can have editors alternatively
-        elif result.has_key('editor') and (type in ['book','proceedings']):
-            result['editor_flag'] = True
-            for each in result['editor']:
-                each = each.replace(' AND', ' and')
-                authorlist.extend( each.split(' and') )
-        if result.has_key('authorURLs'):
-            authorURLlist = result['authorURLs'].split('and ')
-
-        if authorlist:
-            alist = []
-            authorlist = [x for x in authorlist if x]
-            for author in authorlist:
-                fname = mname = lname = ''
-                parts = self.splitAuthor(author)
-                if len(parts) == 1:
-                    lname = parts[0].strip()
-                else:
-                    lname = parts[-1].strip()
-                    fname = parts[0].strip()
-                    if parts[1:-1]:
-                        for part in parts[1:-1]:
-                            mname = mname + part.strip()
-                adict = {'firstname': fname,
-                         'middlename': mname,
-                         'lastname': lname}
-                alist.append(adict)
-
-        if authorURLlist and alist:
-            index = 0
-            for url in authorURLlist:
-                alist[index]['homepage'] = url.strip()
-                index += 1
-
-        if authorlist:
-            result['authors'] = alist
-
+                setattr(obj, key, v)
         # do some renaming and reformatting
-        tmp = result.get('note')
+        tmp = obj.note
         while tmp and tmp[-1] in ['}', ',', '\n', '\r']:
             tmp = tmp[:-1]
         if tmp:
-            result['note'] = tmp
-        result['publication_year'] = result.get('year', '')
-        result['publication_month'] = result.get('month', '')
-        result['publication_url'] = result.get('url', '')
-        ## result['publication_title'] = result.get('title', '')
-        tmp = result.get('title','')
+            obj.note = tmp
+        tmp = obj.title
         for car in ('\n', '\r', '\t'):
             tmp = tmp.replace(car, ' ')
         while '  ' in tmp:
             tmp = tmp.replace('  ', ' ')
-        result['title'] = tmp
-
-        return result
+        obj.title = tmp
+        return obj
 
     # the helper method's
 
     def splitAuthor(self, author=None):
-        if not author: return []
+        if not author:
+            return []
         #parts = author.replace('.', ' ').split(',',1)
         parts = author.split(',',1)
-        if len(parts) == 1: return parts[0].split()
+        if len(parts) == 1:
+            return parts[0].split()
         else:
             tmp = parts[1].split()
             tmp.append(parts[0])
             return tmp
+
+    def parseAuthors(self, value, isEditor=False):
+        authors = []
+        author_klass = self.class_outputs['author']
+        value = value.replace(' AND', ' and')
+        authorlist = value.split(' and')
+        for author in authorlist:
+            fname = mname = lname = u''
+            parts = self.splitAuthor(author)
+            if len(parts) == 1:
+                lname = parts[0].strip()
+            else:
+                lname = parts[-1].strip()
+                fname = parts[0].strip()
+                if parts[1:-1]:
+                    for part in parts[1:-1]:
+                        mname = mname + part.strip()
+            authobj = author_klass()
+            authobj.firstname = fname
+            authobj.middlename = mname
+            authobj.lastname = lname
+            authobj.isEditor = isEditor
+            authors.append(authobj)
+        return authors
 
     def clean(self, value):
         value = value.replace('{', '').replace('}', '').strip()

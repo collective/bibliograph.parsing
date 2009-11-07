@@ -1,34 +1,10 @@
 from zope.interface import Interface
 
 
-class IBibliographyParser(Interface):
-    """ Interface for bibliographic input parsers
+class IParserImplementationDetail(Interface):
+    """This constitutes an implementation detail which is useful for parser
+    implementers but not for users of the parsers.
     """
-
-    def isAvailable():
-        """
-        are all pre-requisites for this parser fullfilled?
-        """
-
-    def isEnabled():
-        """
-        is this parser enabled by the portal manager (default: yes)?
-        """
-
-    def getFormatName():
-        """
-        returns the name of the format
-        """
-
-    def getFormatExtension():
-        """
-        returns the filename extension of the format
-        """
-
-    def getDelimiter():
-        """
-        returns the delimiter used to split a list of entries into pieces
-        """
 
     def getPattern():
         """
@@ -53,17 +29,15 @@ class IBibliographyParser(Interface):
         returns true (1) if so and false (0) otherwise
         """
 
-    def getEntries(source):
-        """
-        splits a (text) file with several entries
-        parses the entries
-        returns a list of the parsed entries
-        """
-
     def splitSource(source):
         """
         splits a (text) file with several entries
         returns a list of those entries
+        """
+
+    def getDelimiter():
+        """
+        returns the delimiter used to split a list of entries into pieces
         """
 
     def parseEntry(entry):
@@ -73,3 +47,57 @@ class IBibliographyParser(Interface):
         returns a dictionary to be passed to
         BibliographyEntry's edit method
         """
+
+
+class IBibliographyParser(Interface):
+    """ Interface for bibliographic input parsers
+    """
+
+    def isAvailable():
+        """
+        are all pre-requisites for this parser fullfilled?
+        """
+
+    def isEnabled():
+        """
+        is this parser enabled by the portal manager (default: yes)?
+        """
+
+    def getFormatName():
+        """
+        returns the name of the format
+        """
+
+    def getFormatExtension():
+        """
+        returns the filename extension of the format
+        """
+
+    def getEntries(source):
+        """
+        splits a (text) file with several entries
+        parses the entries
+        returns a list of the parsed entries
+        """
+
+    def setClassOutputs(author=None,
+                        identifier=None,
+                        article=None,
+                        book=None,
+                        booklet=None,
+                        conference=None,
+                        inbook=None,
+                        incollection=None,
+                        inproceedings=None,
+                        manual=None,
+                        misc=None,
+                        masterthesis=None,
+                        phdthesis=None,
+                        proceedings=None,
+                        techreport=None,
+                        unpublished=None
+                        ):
+        """Set the classes that should be used for the return value of
+        getEntries.
+        """
+    

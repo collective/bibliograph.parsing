@@ -32,7 +32,7 @@ class MedlineParser(BibliographyParser):
         self.title = title
         self.setDelimiter(delimiter)
         self.setPattern(pattern, flag)
-
+        super(MedlineParser, self).__init__()
 
     # Here we need to provide 'checkFormat' and 'parseEntry'
 
@@ -73,23 +73,27 @@ class MedlineParser(BibliographyParser):
             nested.append([tokens[i],tokens[i+1]])
 
         # some defaults
-        result['note'] = 'automatic medline import'
-
+        result[u'note'] = u'automatic medline import'
+        # XXX This may be wrong! This parser can currently *only* handle
+        #     article references!
+        result[u'reference_type'] = u'ArticleReference'
         for key, value in nested:
-            if key == 'PT  - ' and (value.find('Journal Article')> -1
-                                    or value.find('JOURNAL ARTICLE')> -1):
-                result['reference_type'] = 'ArticleReference'
+            if 'PT' in key and (   value.find('Journal Article') > -1
+                                or value.find('JOURNAL ARTICLE') > -1):
+                result[u'reference_type'] = u'ArticleReference'
             elif key == 'TI  - ':
                 title = value.replace('\n', ' ').replace('      ', '').strip()
                 result['title'] = title
             elif key == 'AB  - ':
                 tmp = value.replace('\n', ' ').replace('  ', '')
-                result['abstract'] = tmp.replace('  ', '').replace('  ', '')
-            elif key == 'PMID- ': result['pmid'] = str(value).strip()
-            elif key == 'TA  - ': result['journal'] = str(value).strip()
-            elif key == 'VI  - ': result['volume'] = str(value).strip()
-            elif key == 'IP  - ': result['number'] = str(value).strip()
-            elif key == 'PG  - ': result['pages'] = str(value).strip()
+                result[u'abstract'] = tmp.replace('  ', '').replace('  ', '')
+            # Must use u'pmid' (rather than 'pmid') as it gets set on the
+            # IIdentifier implementation below and that requires a unicode value.
+            elif key == 'PMID- ': result[u'pmid'] = value.strip()
+            elif key == 'TA  - ': result[u'journal'] = value.strip()
+            elif key == 'VI  - ': result[u'volume'] = value.strip()
+            elif key == 'IP  - ': result[u'issue'] = value.strip()
+            elif key == 'PG  - ': result[u'pages'] = value.strip()
             elif key == 'DP  - ':
                 result['publication_year'] = value[:4]
                 pmonth = value[5:].replace('\n','').replace('\r','')
@@ -97,12 +101,12 @@ class MedlineParser(BibliographyParser):
             elif key == 'FAU - ':
                 raw = value.replace('\n', '').split(', ')
                 lname = raw[0]
-                fnames = raw[1].split(' ',1)
+                fnames = raw[1].split(' ', 1)
                 fname = fnames[0]
-                if len(fnames)> 1:
+                if len(fnames) > 1:
                     minit = fnames[1]
                 else:
-                    minit = ''
+                    minit = u''
                 adict = {'firstname': fname
                          ,'middlename': minit
                          ,'lastname': lname
@@ -117,11 +121,40 @@ class MedlineParser(BibliographyParser):
                 if len(fnames)> 1:
                     minit = fnames[1:]
                 else:
-                    minit = ''
+                    minit = u''
                 adict = {'firstname': fname
                          ,'middlename': minit
                          ,'lastname': lname
                          }
                 result.setdefault('authors',[]).append(adict)
-
-        return result
+        # Get hold of the correct classes to use in constructing the output
+        id_klass = self.class_outputs['identifier']
+        auth_klass = self.class_outputs['author']
+        reftype = result[u'reference_type'].replace(u'Reference', u'').lower()
+        klass = self.class_outputs[reftype]
+        # Create the reference object from the looked-up class
+        obj = klass()
+        for key, value in result.items():
+            if key == 'reference_type':
+                # We won't set this on the returned object as it's superfluous
+                # once the class/interface is correctly set.
+                continue
+            elif key in ('authors', 'editors'):
+                for each in value:
+                    author = auth_klass()
+                    author.firstname = each['firstname']
+                    author.middlename = each['middlename']
+                    author.lastname = each['lastname']
+                    if key == 'authors':
+                        obj.authors.append(author)
+                    else:
+                        obj.isEditor = True
+                        obj.editors.append(author)
+            elif key in ('pmid', 'doi', 'isbn'):
+                identifier = id_klass()
+                identifier.id = key
+                identifier.value = value
+                obj.identifiers.append(identifier)
+            else:
+                setattr(obj, key, value)
+        return obj

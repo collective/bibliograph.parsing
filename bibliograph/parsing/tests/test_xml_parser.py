@@ -5,11 +5,12 @@ from zope.app.testing.placelesssetup import setUp, tearDown
 from zope.interface.verify import verifyObject
 
 from bibliograph.parsing.tests import setup
-from bibliograph.parsing.tests.base import TestEntries
+from bibliograph.parsing.tests.base import BaseParserTestCase
 from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.xml import XMLParser
 
-class testXMLParser(unittest.TestCase):
+
+class TestXMLParser(BaseParserTestCase):
     """tests to cover the XML parser"""
 
     def setUp(self):
@@ -18,6 +19,7 @@ class testXMLParser(unittest.TestCase):
         from bibliograph.rendering.utility import ExternalTransformUtility    
         ztapi.provideUtility(IBibTransformUtility, ExternalTransformUtility(),
                              name=u'external')
+        self.parser = XMLParser()
 
     def tearDown(self):
         tearDown()
@@ -28,49 +30,38 @@ class testXMLParser(unittest.TestCase):
     
     def test_Parser(self):
         """test the functioning of the parser"""
-        parser = XMLParser()
-        if parser.isAvailable():
-            source = open(setup.MEDLINE_TEST_XML, 'r').read()
+        if self.parser.isAvailable():
+            source = self.readFile(setup.MEDLINE_TEST_XML)
             self.failUnless(source)
-            
-            entries = TestEntries(parser.getEntries(source))
-            
+            entries = self.parser.getEntries(source)
             # are there enough entries?
-            self.failUnless(len(entries) == 4)
-            # are there the right number of authors?
-            self.failUnless(len(entries.author_last_names()) == 13)
+            self.failUnless( len(entries) == 4 )
             # test individual name parsings:
             #  lastname, one initial
-            this_entry = entries.entryByTitle("Molecular genetic evidence for parthenogenesis in the Burmese python, Python molurus bivittatus.")
-            expected_author = {"firstname": "E.", "middlename": "","lastname": "Bruins"}
-            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
-            # lastname, more than one initial
-            expected_author = {"firstname": "T.", "middlename": "V.M.","lastname": "Groot"}
-            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
-            # lastname, firstname, middle initial
-            this_entry = entries.entryByTitle("Pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius).")
-            expected_author = {"firstname": "Robert", "middlename": "P.","lastname": "Hunter"}
-            self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
-            
-                                
+            self.failUnless( len(entries[0].authors) == 3 )
+            self.failUnless( entries[0].authors[0].lastname == u'Groot' )
+            self.failUnless( entries[2].authors[1].lastname == u'Hunter' )
+            self.failUnless( entries[2].authors[1].middlename == u'P.' )
+            t3 = u'Pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius).'
+            self.failUnless( entries[2].title == t3 )
         else:
             print """\nOne or more transformationtool was not found!
 please make sure bibutils is installed to run all tests. """
             print ("-" * 20) + "\n"
             
     def test_FormatDetection(self):
-        parser = XMLParser()
-    
-        s1 = open(setup.MEDLINE_TEST_XML, 'r').read()
-        s2 = open(setup.MEDLINE_TEST_BIB, 'r').read()
-        s3 = open(setup.MEDLINE_TEST_MED, 'r').read()
-        
-        self.failUnless(parser.checkFormat(s1), 'XML Parser failed to detect XML(MODS) format')
-        self.failIf(parser.checkFormat(s2), 'XML Parser incorrectly detected Bibtex format as XML(MODS)')
-        self.failIf(parser.checkFormat(s3), 'XML Parser incorrectly detected Medline format as XML(MODS)')
+        s1 = self.readFile(setup.MEDLINE_TEST_XML)
+        s2 = self.readFile(setup.MEDLINE_TEST_BIB)
+        s3 = self.readFile(setup.MEDLINE_TEST_MED)
+        self.failUnless(self.parser.checkFormat(s1),
+                        'XML Parser failed to detect XML(MODS) format')
+        self.failIf(self.parser.checkFormat(s2),
+                    'XML Parser incorrectly detected Bibtex format as XML(MODS)')
+        self.failIf(self.parser.checkFormat(s3),
+                    'XML Parser incorrectly detected Medline format as XML(MODS)')
     
 
 def test_suite():
     suite = unittest.TestSuite([
-        unittest.makeSuite(testXMLParser),])
+        unittest.makeSuite(TestXMLParser),])
     return suite
