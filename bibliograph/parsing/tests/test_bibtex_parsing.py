@@ -19,6 +19,7 @@ from bibliograph.core.interfaces import IIdentifier
 from bibliograph.core.interfaces import IBibliographicReference
 from bibliograph.core.interfaces import IArticleReference
 from bibliograph.core.interfaces import IInbookReference
+from bibliograph.core.interfaces import IIncollectionReference
 
 from bibliograph.parsing.parsers.bibtex import BibtexParser
 from bibliograph.parsing.tests import setup
@@ -90,6 +91,20 @@ class TestBibtexParsing(BaseParserTestCase):
         source = self.parser.preprocess(source)
         result = self.parser.parseEntry(source)
         self.failUnless(IInbookReference.providedBy(result))
+        for key in ref.keys():
+            value = getattr(result, key, None)
+            self.failUnless( ref[key] == value, (key, ref[key], value) )
+
+    def testBibtexIncollectionChapterHandling(self):
+        source = self.readFile(setup.BIBTEX_TEST_INCOLLECTIONCHAPTER)
+        ref = {
+            'volumetitle': u'Order and Conflict in Contemporary Capitalism',
+            'title': u'Market-Independent Income Distribution: Efficiency and Legitimacy',
+            'chapter': u'9',
+        }
+        source = self.parser.preprocess(source)
+        result = self.parser.parseEntry(source)
+        self.failUnless(IIncollectionReference.providedBy(result))
         for key in ref.keys():
             value = getattr(result, key, None)
             self.failUnless( ref[key] == value, (key, ref[key], value) )

@@ -222,31 +222,16 @@ class BibtexParser(BibliographyParser):
         for k,v in self.group(tokens[1:],2):
             key = k[1:-1].strip().lower()
             v = self.clean(v.rstrip().rstrip(',').rstrip())
-            # INBOOKs mapping: title -> booktitle, chapter -> chapter and title
-            if reftype in ('inbook', 'incollection'):#, 'inproceedings'):
-                if key in ('title', 'booktitle'):
-                    key = 'volumetitle'
-                if key == 'chapter':
-                    key = 'title'
+            # Inbook/collection mapping: booktitle -> volumetitle
+            if key == 'booktitle' and reftype in ('inbook', 'incollection'):
+                key = 'volumetitle'
             # special procedure for authors and editors
             if key == 'author':
-                [obj.authors.append(auth) for auth in self.parseAuthors(v, isEditor=False)]
+                auths = self.parseAuthors(v, isEditor=False)
+                [obj.authors.append(auth) for auth in auths]
             elif key == 'editor' and reftype in ('inbook', 'incollection', 'inproceedings'):
-                [obj.editors.append(auth) for auth in self.parseAuthors(v, isEditor=True)]
-            elif key == 'year':
-                obj.publication_year = v
-            elif key == 'month':
-                obj.publication_month = v
-            elif key == 'number':
-                obj.issue = v
-            elif (key == 'keywords'):
-                #if result.has_key('keywords'):
-                #    result[key].append(v)
-                #else:
-                #    result[key] = [ v, ]
-                # XXX We don't handle this at the moment as they should, perhaps
-                #     be mapped to plone keywords
-                pass
+                eds = self.parseAuthors(v, isEditor=True)
+                [obj.editors.append(auth) for auth in eds]
             elif key in ('doi', 'isbn', 'pmid'):
                 # These are 'identifiers'...
                 idobj = id_klass()
@@ -254,20 +239,29 @@ class BibtexParser(BibliographyParser):
                 idobj.value = v
                 obj.identifiers.append(idobj)
             else:
-                setattr(obj, key, v)
+                # Map some keys to different schema fields
+                attr_map = {'year'      :   'publication_year',
+                            'month'     :   'publication_month',
+                            'number'    :   'issue'}
+                attr = attr_map.get(key, key)
+                setattr(obj, attr, v)
         # do some renaming and reformatting
-        tmp = obj.note
+        #if obj.note:
+        #    obj.note = self._cleanText(obj.note)
+        #if obj.title:
+        #    obj.title = self._cleanText(obj.title)
+        return obj
+
+    def _cleanText(self,
+                   text,
+                   remove=('}', ',', '\n', '\r'),
+                   spacesub=('  ', '\t')):
+        tmp = text[:]
         while tmp and tmp[-1] in ['}', ',', '\n', '\r']:
             tmp = tmp[:-1]
-        if tmp:
-            obj.note = tmp
-        tmp = obj.title
-        for car in ('\n', '\r', '\t'):
-            tmp = tmp.replace(car, ' ')
-        while '  ' in tmp:
-            tmp = tmp.replace('  ', ' ')
-        obj.title = tmp
-        return obj
+        for each in spacesub:
+            tmp = tmp.replace(each, ' ')
+        return tmp
 
     # the helper method's
 

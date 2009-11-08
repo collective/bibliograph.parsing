@@ -195,6 +195,7 @@ class BibliographyParser(object):
                         misc=MiscReference,
                         masterthesis=MasterthesisReference,
                         phdthesis=PhdthesisReference,
+                        preprint=UnpublishedReference,
                         proceedings=ProceedingsReference,
                         techreport=TechreportReference,
                         unpublished=UnpublishedReference,

@@ -19,6 +19,8 @@ BIBTEX_TEST_MULTI_AUTHORS = join(PACKAGE_HOME, 'samples',
                                  'bibtex_test_multiauthors.bib')
 BIBTEX_TEST_INBOOKREFERENCES = join(PACKAGE_HOME, 'samples',
                                  'bibtex_test_inbookreferences.bib')
+BIBTEX_TEST_INCOLLECTIONCHAPTER = join(PACKAGE_HOME, 'samples',
+                                 'bibtex_test_incollectionchapter.bib')
 BIBTEX_TEST_LASTFIELDKOMMA = join(PACKAGE_HOME, 'samples',
                                  'bibtex_test_lastfieldkomma.bib')
 BIBTEX_TEST_TYPEFIELD = join(PACKAGE_HOME, 'samples',
