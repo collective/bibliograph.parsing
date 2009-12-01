@@ -1,3 +1,7 @@
+0.2.0 (unreleased)
+==================
+- added BibTeX parsing support for identifiers (ISBN, ASIN, PURL, URN, ISSN, DOI)
+
 0.1.0 (2008-09-04)
 ==================
 

@@ -317,6 +317,13 @@ class BibtexParser(BibliographyParser):
             tmp = tmp.replace('  ', ' ')
         result['title'] = tmp
 
+        # collect identifiers
+        identifiers = list()
+        for key in ('isbn', 'doi', 'asin', 'purl', 'urn', 'issn'):
+            if key in result:
+                identifiers.append({'label' : key.upper(), 'value': result[key]})
+        if identifiers:
+            result['identifiers'] = identifiers
         return result
 
     # the helper method's
