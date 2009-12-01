@@ -49,8 +49,8 @@ class BibtexParser(BibliographyParser):
         """
         pattern = re.compile('^@[A-Z|a-z]*{', re.M)
         all_tags = re.findall(pattern, source)
-        
-        if all_tags:        
+
+        if all_tags:
             for t in all_tags:
                 type = t.strip('@{').lower()
                 if type not in ('article','book','booklet','conference','inbook','incollection',
