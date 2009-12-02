@@ -32,7 +32,7 @@ class BibtexParser(BibliographyParser):
                  id = 'bibtex',
                  title = "BibTeX parser",
                  delimiter = '}\s*@',
-                 pattern = '(,\s*\w{2,}\s*=)'):
+                 pattern = '(,\s*[\w\-]{2,}\s*=)'):
         """
         initializes including the regular expression patterns
         """
@@ -204,7 +204,6 @@ class BibtexParser(BibliographyParser):
         # remove newlines and <CR>s, and remove the last '}'
         entry = entry.replace('\n', ' ').replace('\r', '').replace('\t', ' ').rstrip().rstrip('}')
         tokens = self.pattern.split(entry)
-
         try:
             type, pid = tokens[0].strip().split('{')
             type = type.replace('@', '').strip().lower()
@@ -324,6 +323,7 @@ class BibtexParser(BibliographyParser):
                 identifiers.append({'label' : key.upper(), 'value': result[key]})
         if identifiers:
             result['identifiers'] = identifiers
+
         return result
 
     # the helper method's
