@@ -71,7 +71,7 @@ class TestBibtexParsing(unittest.TestCase):
         result = self.parser.parseEntry(source)
 
         for key in ref.keys():
-            self.failUnless( result.has_key(key) and (ref[key] == result[key]) )
+            self.failUnless( result.has_key(key) and (ref[key] == result[key]),key )
 
     def testAnnoteParsing(self):
         source = open(setup.BIBTEX_TEST_BIB, 'r').read()
@@ -111,10 +111,27 @@ class TestBibtexParsing(unittest.TestCase):
         self.failUnless( results[0]['publication_type'] == results[1]['publication_type']  )
         self.failUnless( results[0]['publication_type'] == 'Doktorarbeit,,,' )
 
+class TestBibtexParsing2(unittest.TestCase):
+    """ more tests """
+
+    def setUp(self):
+        self.parser = BibtexParser()
+
+    def testBibtexWithCustomFieldnames(self):
+        source = open(setup.BIBTEX_TEST_BIB2, 'r').read()
+        results = self.parser.getEntries(source)
+        r1 = results[0]
+        self.assertEqual(r1['month'], 'Mar')
+        self.assertEqual(r1['doi'], '10.1002/(ISSN)1097-0231')
+        self.assertEqual(r1['date-added'], '2008-08-06 17:48:48 +0200')
+        self.assertEqual(r1['rating'], '0')
+
+
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestBibtexParsing))
+    suite.addTest(makeSuite(TestBibtexParsing2))
     return suite
 
 if __name__ == '__main__':
