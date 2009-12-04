@@ -32,7 +32,7 @@ class BibtexParser(BibliographyParser):
                  id = 'bibtex',
                  title = "BibTeX parser",
                  delimiter = '}\s*@',
-                 pattern = '(,\s*\w{2,}\s*=)'):
+                 pattern = '(,\s*[\w\-]{2,}\s*=)'):
         """
         initializes including the regular expression patterns
         """
@@ -49,8 +49,8 @@ class BibtexParser(BibliographyParser):
         """
         pattern = re.compile('^@[A-Z|a-z]*{', re.M)
         all_tags = re.findall(pattern, source)
-        
-        if all_tags:        
+
+        if all_tags:
             for t in all_tags:
                 type = t.strip('@{').lower()
                 if type not in ('article','book','booklet','conference','inbook','incollection',
@@ -204,7 +204,6 @@ class BibtexParser(BibliographyParser):
         # remove newlines and <CR>s, and remove the last '}'
         entry = entry.replace('\n', ' ').replace('\r', '').replace('\t', ' ').rstrip().rstrip('}')
         tokens = self.pattern.split(entry)
-
         try:
             type, pid = tokens[0].strip().split('{')
             type = type.replace('@', '').strip().lower()
@@ -316,6 +315,14 @@ class BibtexParser(BibliographyParser):
         while '  ' in tmp:
             tmp = tmp.replace('  ', ' ')
         result['title'] = tmp
+
+        # collect identifiers
+        identifiers = list()
+        for key in ('isbn', 'doi', 'asin', 'purl', 'urn', 'issn'):
+            if key in result:
+                identifiers.append({'label' : key.upper(), 'value': result[key]})
+        if identifiers:
+            result['identifiers'] = identifiers
 
         return result
 
