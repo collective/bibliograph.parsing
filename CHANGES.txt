@@ -1,5 +1,6 @@
-0.2.0 (unreleased)
+0.2.0 (2009-12-04)
 ==================
+
 - added BibTeX parsing support for identifiers (ISBN, ASIN, PURL, URN, ISSN, DOI)
 - BibTeX parser no deals correctly with keys containing a dash like 'date-modified'
 - added more tests
