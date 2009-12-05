@@ -238,11 +238,15 @@ class BibtexParser(BibliographyParser):
                     result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
                 else:
                     result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
-            elif (key == 'keywords'):
-                if result.has_key('keywords'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
+            elif key == 'keywords':
+                if not result.has_key(key):
+                    # Original BibTeX files contain only *one* 'keywords = '
+                    # for multiple keywords
+                    result[key] = self.splitMultiple(v) 
                 else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+                    # This is likely used by other importers/parser trying to mis-use
+                    # the BibTeX importer with multiple keywords
+                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()))
             else:
                 value = self.clean(v.rstrip().rstrip(',').rstrip())
                 result[key] = value
@@ -337,6 +341,15 @@ class BibtexParser(BibliographyParser):
             tmp = parts[1].split()
             tmp.append(parts[0])
             return tmp
+
+    def splitMultiple(self, value):
+        value = self.clean(value)
+        result = list()
+        for item in value.split(','):
+            item = item.strip()
+            if item:
+                result.append(item)
+        return result
 
     def clean(self, value):
         value = value.replace('{', '').replace('}', '').strip()

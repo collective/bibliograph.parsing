@@ -125,6 +125,9 @@ class TestBibtexParsing2(unittest.TestCase):
         self.assertEqual(r1['doi'], '10.1002/(ISSN)1097-0231')
         self.assertEqual(r1['date-added'], '2008-08-06 17:48:48 +0200')
         self.assertEqual(r1['rating'], '0')
+        self.assertEqual(r1['keywords'], ['biology', 'chemistry'])
+        r2 = results[1]
+        self.assertEqual(r2['keywords'], ['something strange'])
 
 
 def test_suite():
