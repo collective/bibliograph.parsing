@@ -48,4 +48,12 @@ Sources
 
 Formats for input files have been gleaned from a number of sources:  
 RIS: http://www.refman.com/support/risformat_intro.asp
+
+Contributors
+-------------
+
+- Paul Bugni, pbugni@u.washington.edu, author
+- Cris Ewing, cewing@u.washington.edu, author
+- Raphael Ritz, r.ritz@biologie.hu-berlin.de, parsers
+- Andreas Jung, info@zopyx.com, bug fixes
    

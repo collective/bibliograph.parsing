@@ -1,3 +1,0 @@
-- Paul Bugni, pbugni@u.washington.edu, Author
-- Cris Ewing, cewing@u.washington.edu, Author
-- Raphael Ritz, r.ritz@biologie.hu-berlin.de, Parsers
