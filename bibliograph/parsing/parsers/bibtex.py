@@ -220,24 +220,24 @@ class BibtexParser(BibliographyParser):
                     key = 'booktitle'
 
                 if key == 'chapter':
-                    result['title'] = self.clean(v.rstrip().rstrip(',').rstrip())
+                    result['title'] = self.cleanLine(v)
 
             # BibTex field "type" maps to CMFBAT field "publication_type"
             if key == 'type':
                 key = 'publication_type'
-                result[key] = self.clean(v.rstrip().rstrip(',').rstrip())
+                result[key] = self.cleanLine(v)
 
             # special procedure for authors and editors
             elif key == 'author':
                 if result.has_key('author'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
+                    result[key].append(self.cleanLine(v))
                 else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+                    result[key] = [ self.cleanLine(v) ]
             elif (key == 'editor') and (type in ['book','proceedings']):
                 if result.has_key('editor'):
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()) )
+                    result[key].append(self.cleanLine(v)) 
                 else:
-                    result[key] = [ self.clean(v.rstrip().rstrip(',').rstrip()), ]
+                    result[key] = [self.cleanLine(v)]
             elif key == 'keywords':
                 if not result.has_key(key):
                     # Original BibTeX files contain only *one* 'keywords = '
@@ -246,9 +246,9 @@ class BibtexParser(BibliographyParser):
                 else:
                     # This is likely used by other importers/parser trying to mis-use
                     # the BibTeX importer with multiple keywords
-                    result[key].append( self.clean(v.rstrip().rstrip(',').rstrip()))
+                    result[key].append(self.cleanLine(v))
             else:
-                value = self.clean(v.rstrip().rstrip(',').rstrip())
+                value = self.cleanLine(v)
                 result[key] = value
                 # Aliasing the value to an upper-cased key so that when this dictionary
                 # is passed into <a_reference_object>.edit(**dictionary), the values
@@ -356,6 +356,9 @@ class BibtexParser(BibliographyParser):
         if value and value[0] == '"' and len(value) > 1:
             value = value[1:-1]
         return value
+
+    def cleanLine(self, value):
+        return self.clean(value.rstrip().rstrip(',').rstrip())
 
     def group(self, p,n):
         """ Group a sequence p into a list of n tuples."""
