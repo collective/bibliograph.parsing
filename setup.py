@@ -7,25 +7,12 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 long_description = (
-    read('README.txt')
-    + '\n' +
-    'Change history\n'
-    '**************\n'
-    + '\n' + 
-    read('CHANGES.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
     read('bibliograph', 'parsing', 'README.txt')
     + '\n' +
-    'Contributors\n' 
-    '************\n'
-    + '\n' +
-    read('CONTRIBUTORS.txt')
-    + '\n' +
-    'Download\n'
-    '********\n'
+    'Change history\n'
+    '==============\n'
+    + '\n' + 
+    read('CHANGES.txt')
     )
 
 setup(name='bibliograph.parsing',
