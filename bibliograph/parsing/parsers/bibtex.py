@@ -14,6 +14,29 @@ import re
 from bibliograph.parsing.interfaces import IBibliographyParser
 from bibliograph.parsing.parsers.base import BibliographyParser
 
+from bibliograph.core.content import Author
+from bibliograph.core.content import Identifier
+from bibliograph.core.content import Pages
+from bibliograph.core.content import Volume
+from bibliograph.core.content import WithinVolume
+from bibliograph.core.content import Address
+from bibliograph.core.content import BibliographicReference
+from bibliograph.core.content import ArticleReference
+from bibliograph.core.content import BookReference
+from bibliograph.core.content import BookletReference
+from bibliograph.core.content import ConferenceReference
+from bibliograph.core.content import InbookReference
+from bibliograph.core.content import IncollectionReference
+from bibliograph.core.content import InproceedingsReference
+from bibliograph.core.content import ManualReference
+from bibliograph.core.content import MiscReference
+from bibliograph.core.content import MasterthesisReference
+from bibliograph.core.content import PhdthesisReference
+from bibliograph.core.content import ProceedingsReference
+from bibliograph.core.content import TechreportReference
+from bibliograph.core.content import UnpublishedReference
+from bibliograph.core.content import WebpublishedReference
+
 from bibliograph.core.utils import _encode, _decode
 from bibliograph.core.encodings import _latex2utf8enc_mapping
 
@@ -198,7 +221,27 @@ class BibtexParser(BibliographyParser):
 
     # done with preprocessing
 
-    def parseEntry(self, entry):
+    def parseEntry(self,
+                   entry,
+                   author=Author,
+                   identifier=Identifier,
+                   article=ArticleReference,
+                   book=BookReference,
+                   booklet=BookletReference,
+                   conference=ConferenceReference,
+                   inbook=InbookReference,
+                   incollection=IncollectionReference,
+                   inproceedings=InproceedingsReference,
+                   manual=ManualReference,
+                   misc=MiscReference,
+                   masterthesis=MasterthesisReference,
+                   phdthesis=PhdthesisReference,
+                   preprint=UnpublishedReference,
+                   proceedings=ProceedingsReference,
+                   techreport=TechreportReference,
+                   unpublished=UnpublishedReference,
+                   webpublished=WebpublishedReference
+                   ):
         """
         parses a single entry
 
@@ -214,8 +257,9 @@ class BibtexParser(BibliographyParser):
         except:
             return "Bibtex Parser Error: malformed first line."
         # Get hold of the correct classes to use in constructing the output
-        id_klass = self.class_outputs['identifier']
-        klass = self.class_outputs[reftype]
+        id_klass = locals().get('identifier')
+        auth_klass = locals().get('author')
+        klass = locals().get(reftype)
         # Create the reference object from the looked-up class
         obj = klass()
         # Iterate over the key/value pairs from the bibtex
@@ -227,10 +271,10 @@ class BibtexParser(BibliographyParser):
                 key = 'volumetitle'
             # special procedure for authors and editors
             if key == 'author':
-                auths = self.parseAuthors(v, isEditor=False)
+                auths = self.parseAuthors(v, auth_klass, isEditor=False)
                 [obj.authors.append(auth) for auth in auths]
             elif key == 'editor' and reftype in ('inbook', 'incollection', 'inproceedings'):
-                eds = self.parseAuthors(v, isEditor=True)
+                eds = self.parseAuthors(v, auth_klass, isEditor=True)
                 [obj.editors.append(auth) for auth in eds]
             elif key in ('doi', 'isbn', 'pmid'):
                 # These are 'identifiers'...
@@ -277,9 +321,8 @@ class BibtexParser(BibliographyParser):
             tmp.append(parts[0])
             return tmp
 
-    def parseAuthors(self, value, isEditor=False):
+    def parseAuthors(self, value, klass, isEditor=False):
         authors = []
-        author_klass = self.class_outputs['author']
         value = value.replace(' AND', ' and')
         authorlist = value.split(' and')
         for author in authorlist:
@@ -293,7 +336,7 @@ class BibtexParser(BibliographyParser):
                 if parts[1:-1]:
                     for part in parts[1:-1]:
                         mname = mname + part.strip()
-            authobj = author_klass()
+            authobj = klass()
             authobj.firstname = fname
             authobj.middlename = mname
             authobj.lastname = lname

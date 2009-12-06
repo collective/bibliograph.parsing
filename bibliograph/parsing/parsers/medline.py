@@ -8,6 +8,29 @@
 """MedlineParser class"""
 import re
 
+from bibliograph.core.content import Author
+from bibliograph.core.content import Identifier
+from bibliograph.core.content import Pages
+from bibliograph.core.content import Volume
+from bibliograph.core.content import WithinVolume
+from bibliograph.core.content import Address
+from bibliograph.core.content import BibliographicReference
+from bibliograph.core.content import ArticleReference
+from bibliograph.core.content import BookReference
+from bibliograph.core.content import BookletReference
+from bibliograph.core.content import ConferenceReference
+from bibliograph.core.content import InbookReference
+from bibliograph.core.content import IncollectionReference
+from bibliograph.core.content import InproceedingsReference
+from bibliograph.core.content import ManualReference
+from bibliograph.core.content import MiscReference
+from bibliograph.core.content import MasterthesisReference
+from bibliograph.core.content import PhdthesisReference
+from bibliograph.core.content import ProceedingsReference
+from bibliograph.core.content import TechreportReference
+from bibliograph.core.content import UnpublishedReference
+from bibliograph.core.content import WebpublishedReference
+
 from bibliograph.parsing.parsers.base import BibliographyParser
 
 
@@ -53,7 +76,27 @@ class MedlineParser(BibliographyParser):
         else:
             return 0
 
-    def parseEntry(self, entry):
+    def parseEntry(self,
+                   entry,
+                   author=Author,
+                   identifier=Identifier,
+                   article=ArticleReference,
+                   book=BookReference,
+                   booklet=BookletReference,
+                   conference=ConferenceReference,
+                   inbook=InbookReference,
+                   incollection=IncollectionReference,
+                   inproceedings=InproceedingsReference,
+                   manual=ManualReference,
+                   misc=MiscReference,
+                   masterthesis=MasterthesisReference,
+                   phdthesis=PhdthesisReference,
+                   preprint=UnpublishedReference,
+                   proceedings=ProceedingsReference,
+                   techreport=TechreportReference,
+                   unpublished=UnpublishedReference,
+                   webpublished=WebpublishedReference
+                   ):
         """
         parses a single entry
 
@@ -128,10 +171,10 @@ class MedlineParser(BibliographyParser):
                          }
                 result.setdefault('authors',[]).append(adict)
         # Get hold of the correct classes to use in constructing the output
-        id_klass = self.class_outputs['identifier']
-        auth_klass = self.class_outputs['author']
+        id_klass = locals().get('identifier')
+        auth_klass = locals().get('author')
         reftype = result[u'reference_type'].replace(u'Reference', u'').lower()
-        klass = self.class_outputs[reftype]
+        klass = locals().get(reftype)
         # Create the reference object from the looked-up class
         obj = klass()
         for key, value in result.items():

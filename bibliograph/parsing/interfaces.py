@@ -40,7 +40,26 @@ class IParserImplementationDetail(Interface):
         returns the delimiter used to split a list of entries into pieces
         """
 
-    def parseEntry(entry):
+    def parseEntry(entry,
+                   author=None,
+                   identifier=None,
+                   article=None,
+                   book=None,
+                   booklet=None,
+                   conference=None,
+                   inbook=None,
+                   incollection=None,
+                   inproceedings=None,
+                   manual=None,
+                   misc=None,
+                   masterthesis=None,
+                   phdthesis=None,
+                   preprint=None,
+                   proceedings=None,
+                   techreport=None,
+                   unpublished=None,
+                   webpublished=None
+                   ):
         """
         parses a single entry
 
@@ -73,31 +92,10 @@ class IBibliographyParser(Interface):
         returns the filename extension of the format
         """
 
-    def getEntries(source):
+    def getEntries(source, **kw):
         """
-        splits a (text) file with several entries
-        parses the entries
-        returns a list of the parsed entries
+        Splits a (text) file with several entries and parses the entries.
+        Returns a list of the parsed entries. Keyword arguments beyond `source'
+        set the classes/factories that are used for the parsed entries.
         """
 
-    def setClassOutputs(author=None,
-                        identifier=None,
-                        article=None,
-                        book=None,
-                        booklet=None,
-                        conference=None,
-                        inbook=None,
-                        incollection=None,
-                        inproceedings=None,
-                        manual=None,
-                        misc=None,
-                        masterthesis=None,
-                        phdthesis=None,
-                        proceedings=None,
-                        techreport=None,
-                        unpublished=None
-                        ):
-        """Set the classes that should be used for the return value of
-        getEntries.
-        """
-    

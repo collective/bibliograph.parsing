@@ -60,7 +60,6 @@ class BibliographyParser(object):
         minimal initialization
         """
         self.format = BibliographyParser.format
-        self.setClassOutputs()
 
     def isAvailable(self):
         """ by default parser is available, override in specific parser's code
@@ -149,7 +148,27 @@ class BibliographyParser(object):
             entries.remove(u'\n')
         return entries
 
-    def parseEntry(self, entry):
+    def parseEntry(self,
+                   entry,
+                   author=Author,
+                   identifier=Identifier,
+                   article=ArticleReference,
+                   book=BookReference,
+                   booklet=BookletReference,
+                   conference=ConferenceReference,
+                   inbook=InbookReference,
+                   incollection=IncollectionReference,
+                   inproceedings=InproceedingsReference,
+                   manual=ManualReference,
+                   misc=MiscReference,
+                   masterthesis=MasterthesisReference,
+                   phdthesis=PhdthesisReference,
+                   preprint=UnpublishedReference,
+                   proceedings=ProceedingsReference,
+                   techreport=TechreportReference,
+                   unpublished=UnpublishedReference,
+                   webpublished=WebpublishedReference
+                   ):
         """
         parses a single entry
 
@@ -158,14 +177,14 @@ class BibliographyParser(object):
         """
         pass  # needs to be overwriten by the individual parser
 
-    def getEntries(self, source):
+    def getEntries(self, source, **kw):
         """
         splits a (text) file with several entries
         parses the entries
         returns a list of the parsed entries
         """
         source = self.checkEncoding(source)
-        return [self.parseEntry(entry) \
+        return [self.parseEntry(entry, **kw) \
                 for entry in self.splitSource(source)]
 
     def checkEncoding(self, source):
@@ -180,28 +199,6 @@ class BibliographyParser(object):
             source = unicode(source, 'latin1')
         #return source.encode('utf-8')
         return source
-
-    def setClassOutputs(self,
-                        author=Author,
-                        identifier=Identifier,
-                        article=ArticleReference,
-                        book=BookReference,
-                        booklet=BookletReference,
-                        conference=ConferenceReference,
-                        inbook=InbookReference,
-                        incollection=IncollectionReference,
-                        inproceedings=InproceedingsReference,
-                        manual=ManualReference,
-                        misc=MiscReference,
-                        masterthesis=MasterthesisReference,
-                        phdthesis=PhdthesisReference,
-                        preprint=UnpublishedReference,
-                        proceedings=ProceedingsReference,
-                        techreport=TechreportReference,
-                        unpublished=UnpublishedReference,
-                        webpublished=WebpublishedReference
-                        ):
-        self.class_outputs = locals()
 
 
 class EntryParseError(object):

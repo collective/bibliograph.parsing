@@ -102,13 +102,33 @@ class RISParser(BaseParser):
         tool = getUtility(IBibTransformUtility, name=u"external")
         return tool.transform(source, 'ris', 'bib')
 
-    def parseEntry(self, entry):
-        """See IBibliographyParser.
-        """
-        return super(RISParser, self).parseEntry(entry)
-        #if not rd.has_key('number') and rd.has_key('issue'):
-        #    rd['number'] = rd['issue'].replace(' ', '')
-        #rd['publication_month'] = fixMonth(rd['publication_month'])
-        #return rd
-
+    #def parseEntry(self,
+    #               entry,
+    #               author=Author,
+    #               identifier=Identifier,
+    #               article=ArticleReference,
+    #               book=BookReference,
+    #               booklet=BookletReference,
+    #               conference=ConferenceReference,
+    #               inbook=InbookReference,
+    #               incollection=IncollectionReference,
+    #               inproceedings=InproceedingsReference,
+    #               manual=ManualReference,
+    #               misc=MiscReference,
+    #               masterthesis=MasterthesisReference,
+    #               phdthesis=PhdthesisReference,
+    #               preprint=UnpublishedReference,
+    #               proceedings=ProceedingsReference,
+    #               techreport=TechreportReference,
+    #               unpublished=UnpublishedReference,
+    #               webpublished=WebpublishedReference
+    #               ):
+    #    """See IBibliographyParser.
+    #    """
+    #    return super(RISParser, self).parseEntry(entry)
+    #    #if not rd.has_key('number') and rd.has_key('issue'):
+    #    #    rd['number'] = rd['issue'].replace(' ', '')
+    #    #rd['publication_month'] = fixMonth(rd['publication_month'])
+    #    #return rd
+    #
     # all the rest we inherit from our parent BibTeX(!) parser
