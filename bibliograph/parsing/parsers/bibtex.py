@@ -15,6 +15,8 @@ from bibliograph.parsing.parsers.base import BibliographyParser
 
 from bibliograph.core.utils import _encode, _decode
 from bibliograph.core.encodings import _latex2utf8enc_mapping
+from bibliograph.core.encodings import _latex2utf8enc_mapping_simple
+
 
 _encoding = 'utf-8'   # XXX: should be taken from the site configuration
 
@@ -157,6 +159,9 @@ class BibtexParser(BibliographyParser):
         return self.explicitReplacements(source)
 
     def convertLaTeX2Unicode(self, source):
+
+        for latex_entity in _latex2utf8enc_mapping_simple.keys():
+            source = _encode(_decode(source).replace(latex_entity, _latex2utf8enc_mapping_simple[latex_entity]))
 
         for latex_entity in _latex2utf8enc_mapping.keys():
             source = _encode(_decode(source).replace(latex_entity, _latex2utf8enc_mapping[latex_entity]))
