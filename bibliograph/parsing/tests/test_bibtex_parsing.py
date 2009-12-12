@@ -129,6 +129,13 @@ class TestBibtexParsing2(unittest.TestCase):
         r2 = results[1]
         self.assertEqual(r2['keywords'], ['something strange'])
 
+    def testBibtexEncodedChars(self):
+        source = open(setup.BIBTEX_TEST_BIB3, 'r').read()
+        results = self.parser.getEntries(source)
+        r = results[0]
+        self.assertEqual(r['title'], unicode('Der Fürst', 'iso-8859-15').encode('utf-8'))
+        self.assertEqual(r['publisher'], unicode('Alfred Körner Verlag', 'iso-8859-15').encode('utf-8'))
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
