@@ -176,7 +176,8 @@ class BibtexParser(BibliographyParser):
         wsp_tilde = re.compile(r'[^/\\]~')
         return wsp_tilde.sub(self.tilde2wsp, source).replace('\~', '~')
 
-    def tilde2wsp(self, hit): return hit.group(0)[0] + ' '
+    def tilde2wsp(self, hit): 
+        return hit.group(0)[0] + ' '
 
     def explicitReplacements(self, source):
         # list of 2 tuples; second element replaces first
@@ -338,10 +339,12 @@ class BibtexParser(BibliographyParser):
     # the helper method's
 
     def splitAuthor(self, author=None):
-        if not author: return []
+        if not author: 
+            return []
         #parts = author.replace('.', ' ').split(',',1)
         parts = author.split(',',1)
-        if len(parts) == 1: return parts[0].split()
+        if len(parts) == 1: 
+            return parts[0].split()
         else:
             tmp = parts[1].split()
             tmp.append(parts[0])
@@ -368,7 +371,8 @@ class BibtexParser(BibliographyParser):
     def group(self, p,n):
         """ Group a sequence p into a list of n tuples."""
         mlen, lft = divmod(len(p), n)
-        if lft != 0: mlen += 1
+        if lft != 0: 
+            mlen += 1
 
         # initialize a list of suitable length
         lst = [[None]*n for i in range(mlen)]
