@@ -142,7 +142,7 @@ class BibliographyParser(object):
         try:
             source = unicode(source, 'utf-8')
         except UnicodeDecodeError:
-            source = unicode(source, 'latin1')
+            source = unicode(source, 'iso-8859-15')
         return source.encode('utf-8')
 
 
