@@ -93,12 +93,23 @@ class RISParser(BaseParser):
             and (all_tags[-1:] == ['ER  - ']):
             return 1
         return 0
-        
+
+    def _checkEncoding(self, source):
+        """ The RIS parser can only deal properly with UTF-8 encoded
+            RIS data (since we are use utf-8 as fixed encoding passed
+            to ris2bib.
+        """
+        try:
+            unicode(source, 'utf-8')
+        except UnicodeDecodeError:
+            raise RuntimeError('RIS input does not seem to be properly UTF-8 encoded')
 
     def preprocess(self, source):
         """
         convert RIS to BibTeX
         """
+
+        self._checkEncoding(source)
         tool = getUtility(IBibTransformUtility, name=u"external")
         return tool.transform(source, 'ris', 'bib')
 

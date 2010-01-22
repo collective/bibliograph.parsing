@@ -1,3 +1,9 @@
+0.2.3 (2010-01-22)
+==================
+- added explicit input encoding check for RIS files since bib.core expects
+  from now on RIS input data with UTF-8 encoding
+- updated tests with utf-8 encoded input data
+
 0.2.2 (2009-12-12)
 ==================
 - now dealing correctly with all TeX escapings (and restored

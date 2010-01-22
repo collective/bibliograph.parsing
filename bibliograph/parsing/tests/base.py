@@ -64,16 +64,16 @@ class TestEntry(object):
         for key in required:
             try:
                 setattr(self,key,kw[key])
-            except:
+            except Exception, e:
                 raise Exception("Doesn't look like a valid parsed entry. " +
-                                "Missing at least field: %s from %s" % (key,kw))
+                                "Missing at least field: %s from %s (%s)" % (key, kw, e))
 
         # Optional fields
         for key in kw.keys():
             if key not in required:
                 setattr(self,key,kw[key])
 
-                
+
     def authorIsPresent(self, author_dict):
         """ Expects a dictionary with keys 'firstname', 'middlename', 'lastname'
             Returns true if there is an author in self.authors which matches
@@ -85,5 +85,5 @@ class TestEntry(object):
                     dict_same = False
             if dict_same == True:
                 return True
-            
+
         return False
