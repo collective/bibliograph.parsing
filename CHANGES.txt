@@ -1,3 +1,8 @@
+1.0.0b1 (2010-01-28)
+===================
+- new numbering schema
+- minor tweaks
+
 0.2.3 (2010-01-22)
 ==================
 - added explicit input encoding check for RIS files since bib.core expects
