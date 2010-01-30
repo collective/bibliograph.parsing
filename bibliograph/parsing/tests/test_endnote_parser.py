@@ -50,7 +50,7 @@ class TestEndNoteParser(unittest.TestCase):
                         'Parsed non existing keywords')
             self.failUnless(len(entries.entries[1].keywords) == 9)
             # Confirm a few w/ tricky characters survived the parse
-            kwds = ["Health Services Research/ organization \\& administration",
+            kwds = ["Health Services Research/ organization & administration",
                     "Primary Health Care/ standards",
                     "Program Evaluation",
                     "Quality Assurance, Health Care"]
