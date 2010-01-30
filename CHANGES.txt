@@ -1,9 +1,9 @@
 1.0.0b2 (2010-01-30)
-===================
+====================
 - fixed failing endnote parser test
 
 1.0.0b1 (2010-01-28)
-===================
+?===================
 - new numbering schema
 - minor tweaks
 
