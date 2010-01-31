@@ -7,6 +7,7 @@
 
 """BibtexParser class"""
 
+import os
 import re
 
 from zope.component import getUtility, ComponentLookupError
@@ -22,6 +23,7 @@ from bibliograph.core.encodings import _latex2utf8enc_mapping_simple
 
 _encoding = 'utf-8'   # XXX: should be taken from the site configuration
 haveBibUtils = _hasCommands('bib2xml')
+NOT_FIX_BIBTEX = os.environ.has_key('NOT_FIX_BIBTEX')
 
 class BibtexParser(BibliographyParser):
     """
@@ -76,7 +78,7 @@ class BibtexParser(BibliographyParser):
         source = self.expandMacros(source)
 
         # let Bibutils cleanup up the BibTeX mess
-        if haveBibUtils:
+        if not NOT_FIX_BIBTEX and haveBibUtils:
             try:
                 tool = getUtility(IBibTransformUtility, name=u"external")
                 source = tool.transform(source, 'bib', 'bib')
