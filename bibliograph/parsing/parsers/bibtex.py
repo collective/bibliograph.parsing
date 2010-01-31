@@ -7,18 +7,21 @@
 
 """BibtexParser class"""
 
-# Python stuff
 import re
 
-# Bibliography stuff
+from zope.component import getUtility, ComponentLookupError
+
 from bibliograph.parsing.parsers.base import BibliographyParser
+from bibliograph.rendering.interfaces import IBibTransformUtility
 
 from bibliograph.core.utils import _encode, _decode
+from bibliograph.core.bibutils import _hasCommands
 from bibliograph.core.encodings import _latex2utf8enc_mapping
 from bibliograph.core.encodings import _latex2utf8enc_mapping_simple
 
 
 _encoding = 'utf-8'   # XXX: should be taken from the site configuration
+haveBibUtils = _hasCommands('bib2xml')
 
 class BibtexParser(BibliographyParser):
     """
@@ -71,6 +74,15 @@ class BibtexParser(BibliographyParser):
         converts special characters to their HTML equivalents
         """
         source = self.expandMacros(source)
+
+        # let Bibutils cleanup up the BibTeX mess
+        if haveBibUtils:
+            try:
+                tool = getUtility(IBibTransformUtility, name=u"external")
+                source = tool.transform(source, 'bib', 'bib')
+            except ComponentLookupError:
+                pass
+
         source = self.stripComments(source)
         source = self.convertChars(source)
         # it is important to convertChars before stripping off commands!!!
@@ -159,7 +171,6 @@ class BibtexParser(BibliographyParser):
         return self.explicitReplacements(source)
 
     def convertLaTeX2Unicode(self, source):
-
         for latex_entity in _latex2utf8enc_mapping_simple.keys():
             source = _encode(_decode(source).replace(latex_entity, _latex2utf8enc_mapping_simple[latex_entity]))
 
