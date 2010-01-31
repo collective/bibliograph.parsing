@@ -23,7 +23,7 @@ from bibliograph.core.encodings import _latex2utf8enc_mapping_simple
 
 _encoding = 'utf-8'   # XXX: should be taken from the site configuration
 haveBibUtils = _hasCommands('bib2xml')
-NOT_FIX_BIBTEX = os.environ.has_key('NOT_FIX_BIBTEX')
+FIX_BIBTEX = os.environ.has_key('FIX_BIBTEX')
 
 class BibtexParser(BibliographyParser):
     """
@@ -78,7 +78,7 @@ class BibtexParser(BibliographyParser):
         source = self.expandMacros(source)
 
         # let Bibutils cleanup up the BibTeX mess
-        if not NOT_FIX_BIBTEX and haveBibUtils:
+        if FIX_BIBTEX and haveBibUtils:
             try:
                 tool = getUtility(IBibTransformUtility, name=u"external")
                 source = tool.transform(source, 'bib', 'bib')
