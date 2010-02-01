@@ -41,7 +41,19 @@ of these dictionaries will contain some  number of the following fields:
 |**pages**            |No         |Page numbers within the given volume:number of the |
 |                     |           | periodical in which the content appears           |
 +---------------------+-----------+---------------------------------------------------+
-                                                                                       
+
+Requirements
+------------
+* requires Bibutils 4.6 or higher
+
+Configuration
+-------------
+``bibliograph.parsing`` honors the environment variable ``FIX_BIBTEX``. If set, the module
+will clean up BibTeX import data through the "bib2xml | xml2bib" pipeline in order cleanup
+up improper or misformatted BixTeX data. However you may lose some data (e.g. the ``anotate``
+field will be filtered out through Bibutils).                                                                                       
+
+
                                                                                        
 Sources
 -------
