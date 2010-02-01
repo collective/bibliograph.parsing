@@ -59,7 +59,7 @@ class testRISParser(unittest.TestCase):
             self.failUnless( entry_authors[1]['middlename'] == '' )
 
             last_entry = entries.entries[-1]
-            self.assertEqual(last_entry.authors[1]['lastname'], 'M\\"uller')
+            self.assertEqual(last_entry.authors[1]['lastname'], u'M\xfcller'.encode('utf-8'))
 
         else:
             print """\nOne or more transformationtool was not found!
