@@ -1,6 +1,11 @@
+1.0.0c1 (2010-03-03)
+====================
+* release candidate
+
 1.0.0b5 (2010-02-01)
 ====================
 - fixed RIS tests due to changes in bibliograph.core related to RIS parameters
+
 1.0.0b4 (2010-01-31)
 ====================
 - introducing FIX_BIBTEX environment variable to enable bib2bib transformation
