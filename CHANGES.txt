@@ -1,3 +1,7 @@
+1.0.0c2 (unreleased)
+====================
+* .end -> enw changed for proper format detection
+
 1.0.0c1 (2010-03-03)
 ====================
 * release candidate

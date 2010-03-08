@@ -25,7 +25,7 @@ class EndNoteParser(BaseParser):
     """
 
     format = {'name':'EndNote',
-              'extension':'end'}
+              'extension':'enw'}
 
     def __init__(self,
                  id = 'endnote',
