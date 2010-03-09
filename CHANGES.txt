@@ -1,4 +1,4 @@
-1.0.0c2 (unreleased)
+1.0.0c2 (2010-03-09)
 ====================
 * .end -> enw changed for proper format detection
 
