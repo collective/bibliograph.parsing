@@ -1,3 +1,7 @@
+1.0.0 (2010-03-19)
+==================
+* final release
+
 1.0.0c2 (2010-03-09)
 ====================
 * .end -> enw changed for proper format detection
