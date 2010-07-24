@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+<mods ID="bookreference.2010-07-23.6309074088">
+    <titleInfo>
+        <title>Tröger Ärger</title>
+    </titleInfo>
+    <name type="personal">
+        <namePart type="given">Öger</namePart>
+        <namePart type="family">Hüfner</namePart>
+        <role>
+            <roleTerm authority="marcrelator" type="text">author</roleTerm>
+        </role>
+    </name>
+    <originInfo>
+        <issuance>monographic</issuance>
+        <dateIssued>2010</dateIssued>
+        <publisher>Übersöpf Verlag</publisher>
+    </originInfo>
+    <typeOfResource>text</typeOfResource>
+    <genre authority="marcgt">book</genre>
+    <abstract>Der Ärger über die Wünschelroute</abstract>
+    <identifier type="citekey">bookreference.2010-07-23.6309074088</identifier>
+</mods>
+</modsCollection>
