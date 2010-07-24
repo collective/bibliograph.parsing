@@ -7,6 +7,7 @@ from os.path import join
 MEDLINE_TEST_MED = join(PACKAGE_HOME, 'samples', 'medline_test.med')
 MEDLINE_TEST_BIB = join(PACKAGE_HOME, 'samples', 'medline_test.bib')
 MEDLINE_TEST_XML = join(PACKAGE_HOME, 'samples', 'medline_test.xml')
+UMLAUTS_TEST_XML = join(PACKAGE_HOME, 'samples', 'umlauts.xml')
 BIBTEX_TEST_BIB = join(PACKAGE_HOME, 'samples', 'bibtex_test.bib')
 BIBTEX_TEST_BIB2 = join(PACKAGE_HOME, 'samples', 'bibtex_test2.bib')
 BIBTEX_TEST_BIB3 = join(PACKAGE_HOME, 'samples', 'bibtex_test3.bib')
