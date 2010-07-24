@@ -1,3 +1,5 @@
+# *-* coding: iso-8859-15 *-*
+
 import unittest
 
 from zope.app.testing import ztapi
@@ -34,6 +36,8 @@ class testXMLParser(unittest.TestCase):
 
             entries = TestEntries(parser.getEntries(source))
             self.failUnless(len(entries) == 1)
+            entry = entries.entries[0]
+            self.assertEqual(entry.publisher, u'Übersöpf Verlag'.encode('utf-8'))
 
     
     def test_Parser(self):
