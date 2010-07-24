@@ -25,6 +25,16 @@ class testXMLParser(unittest.TestCase):
     def test_parser_contract(self):
         self.failUnless(IBibliographyParser.providedBy(XMLParser()))
         self.failUnless(verifyObject(IBibliographyParser, XMLParser()))
+
+    def test_parser_with_umlauts(self):
+        parser = XMLParser()
+        if parser.isAvailable():
+            source = open(setup.UMLAUTS_TEST_XML, 'r').read()
+            self.failUnless(source)
+
+            entries = TestEntries(parser.getEntries(source))
+            self.failUnless(len(entries) == 1)
+
     
     def test_Parser(self):
         """test the functioning of the parser"""

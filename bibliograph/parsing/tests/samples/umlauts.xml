@@ -20,5 +20,10 @@
     <genre authority="marcgt">book</genre>
     <abstract>Der Ärger über die Wünschelroute</abstract>
     <identifier type="citekey">bookreference.2010-07-23.6309074088</identifier>
+    <part>
+        <detail type="volume"><number>220</number></detail>
+        <detail type="number"><number>123</number></detail>
+    </part>
+
 </mods>
 </modsCollection>
