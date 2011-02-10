@@ -306,8 +306,7 @@ class BibtexParser(BibliographyParser):
                     lname = parts[-1].strip()
                     fname = parts[0].strip()
                     if parts[1:-1]:
-                        for part in parts[1:-1]:
-                            mname = mname + part.strip()
+                        mname = ' '.join([_ for _ in parts[1:-1]])
                 adict = {'firstname': fname,
                          'middlename': mname,
                          'lastname': lname}
