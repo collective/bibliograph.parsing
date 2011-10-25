@@ -59,7 +59,7 @@ class testXMLParser(unittest.TestCase):
             expected_author = {"firstname": "E.", "middlename": "","lastname": "Bruins"}
             self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
             # lastname, more than one initial
-            expected_author = {"firstname": "T.", "middlename": "V.M.","lastname": "Groot"}
+            expected_author = {"firstname": "T.", "middlename": "V. M.","lastname": "Groot"}
             self.failUnless(this_entry.authorIsPresent(expected_author), "author: %s is not listed" % expected_author)
             # lastname, firstname, middle initial
             this_entry = entries.entryByTitle("Pharmacokinetics and tissue concentrations of azithromycin in ball pythons (Python regius).")
