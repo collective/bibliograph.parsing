@@ -74,7 +74,8 @@ References
 ----------
 
 Formats for input files have been gleaned from a number of sources:
-RIS: http://www.refman.com/support/risformat_intro.asp
+
+- RIS: http://www.refman.com/support/risformat_intro.asp
 
 
 Resources
