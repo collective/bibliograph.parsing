@@ -55,7 +55,8 @@ fields:
 Requirements
 ------------
 
-* requires Bibutils 4.6 or higher
+* requires `Bibutils <http://sourceforge.net/p/bibutils/home/Bibutils/>`_ 4.6
+  or higher
 * depends on `bibliograph.core
   <https://pypi.python.org/pypi/bibliograph.core>`_
 
