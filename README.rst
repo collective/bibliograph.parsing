@@ -70,11 +70,19 @@ However you may lose some data (e.g. the ``anotate`` field will be filtered
 out through Bibutils).
 
 
-Sources
--------
+References
+----------
 
-Formats for input files have been gleaned from a number of sources: 
+Formats for input files have been gleaned from a number of sources:
 RIS: http://www.refman.com/support/risformat_intro.asp
+
+
+Resources
+---------
+
+- Homepage: http://pypi.python.org/pypi/bibliograph.parsing
+- Code repository: https://github.com/collective/bibliograph.parsing
+
 
 Contributors
 -------------
