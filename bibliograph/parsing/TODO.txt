@@ -24,7 +24,7 @@ Future considerations
 Format Issues:
 --------------
 
-- BibTeX format has an interesting problem.  Our sample files include an entry of type
-  'WebPublished', which is not listed anywhere that I can find as a valid entry type for 
-  the format.  Should we add it to the list of valid entry types (overriding the published
-  standard), or should we delete the sample?
+- BibTeX format has an interesting problem. Our sample files include an entry
+  of type 'WebPublished', which is not listed anywhere that I can find as a
+  valid entry type for the format. Should we add it to the list of valid entry
+  types (overriding the published standard), or should we delete the sample?
