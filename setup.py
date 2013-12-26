@@ -40,6 +40,7 @@ setup(name='bibliograph.parsing',
       install_requires=[
           'setuptools',
           'bibliograph.core',
+          'bibliograph.rendering',
       ],
       entry_points="""
       # -*- Entry points: -*-
