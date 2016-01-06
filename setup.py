@@ -41,7 +41,11 @@ setup(name='bibliograph.parsing',
           'setuptools',
           'bibliograph.core',
           'bibliograph.rendering',
+          'zope.component',
+          'zope.interface',
       ],
+      tests_require=['zope.app.testing'],
+      test_suite="bibliograph.parsing.tests.test_all.test_suite",
       entry_points="""
       # -*- Entry points: -*-
       """,
