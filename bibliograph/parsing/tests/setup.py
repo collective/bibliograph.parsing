@@ -1,6 +1,14 @@
 # This is so we can find our sample test files
 from bibliograph.parsing.tests import GLOBALS
-from App.Common import package_home
+# from App.Common import package_home
+import os
+
+
+def package_home(gdict):
+    filename = gdict["__file__"]
+    return os.path.dirname(filename)
+
+
 PACKAGE_HOME = package_home(GLOBALS)
 
 from os.path import join
